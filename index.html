@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Boxing HK</title>
+  <title>Yamasaki Boxing HK</title>
   <style>
     :root {
       --bg: #090909;
       --bg-elevated: #121212;
-      --bg-panel: rgba(255, 255, 255, 0.05);
+      --panel: rgba(255, 255, 255, 0.05);
       --text: #f5f1e8;
-      --muted: #a8a29e;
+      --muted: #b5ada1;
       --line: rgba(255, 255, 255, 0.12);
       --accent: #dc2626;
       --accent-strong: #ef4444;
@@ -32,14 +32,14 @@
 
     body {
       margin: 0;
-      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top right, rgba(220, 38, 38, 0.2), transparent 28%),
-        radial-gradient(circle at top left, rgba(209, 160, 84, 0.09), transparent 22%),
-        linear-gradient(180deg, #111111 0%, #090909 42%, #050505 100%);
+        radial-gradient(circle at top right, rgba(220, 38, 38, 0.22), transparent 26%),
+        radial-gradient(circle at top left, rgba(209, 160, 84, 0.08), transparent 20%),
+        linear-gradient(180deg, #121212 0%, #090909 44%, #050505 100%);
       min-height: 100vh;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     body::before {
@@ -48,16 +48,11 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
       background-size: 72px 72px;
-      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent 85%);
-      opacity: 0.4;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 88%);
+      opacity: 0.45;
     }
 
     a {
@@ -81,7 +76,7 @@
       top: 0;
       z-index: 1000;
       backdrop-filter: blur(16px);
-      background: rgba(9, 9, 9, 0.84);
+      background: rgba(9, 9, 9, 0.86);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
@@ -98,7 +93,7 @@
       align-items: center;
       gap: 0.9rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
@@ -108,11 +103,24 @@
       border-radius: 14px;
       display: grid;
       place-items: center;
-      background:
-        linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(127, 29, 29, 0.9)),
-        #111;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(127, 29, 29, 0.9));
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
       font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .brand-text small {
+      display: block;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
     }
 
     .nav-toggle {
@@ -196,7 +204,6 @@
       border-radius: 999px;
       font-weight: 700;
       letter-spacing: 0.04em;
-      text-transform: uppercase;
       transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
     }
 
@@ -207,7 +214,7 @@
     .cta-primary {
       background: linear-gradient(135deg, var(--accent-strong), var(--accent));
       color: #fff;
-      box-shadow: 0 18px 32px rgba(220, 38, 38, 0.28);
+      box-shadow: 0 18px 32px rgba(220, 38, 38, 0.3);
     }
 
     .cta-secondary {
@@ -229,9 +236,15 @@
       padding: 3rem 0 2rem;
     }
 
-    .hero-grid {
+    .hero-grid,
+    .classes-grid,
+    .about-grid,
+    .pillars-grid,
+    .contact-grid,
+    .booking-grid,
+    .footer-grid {
       display: grid;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     .eyebrow {
@@ -250,18 +263,25 @@
     }
 
     .hero-copy h1 {
-      margin: 1rem 0 1rem;
-      font-size: clamp(2.6rem, 9vw, 5.7rem);
-      line-height: 0.98;
+      margin: 1rem 0 0.75rem;
+      font-size: clamp(2.8rem, 10vw, 5.8rem);
+      line-height: 0.96;
       letter-spacing: -0.05em;
-      text-transform: uppercase;
     }
 
     .hero-copy p {
       margin: 0;
       max-width: 38rem;
       color: var(--muted);
-      font-size: 1.02rem;
+      font-size: 1.04rem;
+    }
+
+    .hero-subtitle {
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .hero-actions {
@@ -278,13 +298,14 @@
       margin-top: 1.8rem;
     }
 
-    .stat-card,
     .panel,
-    .schedule-card,
-    .trainer-card,
-    .price-card,
+    .hero-card,
+    .class-card,
+    .about-card,
+    .pillar-card,
     .contact-card,
-    .embed-card {
+    .embed-card,
+    .ig-card {
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
         rgba(255, 255, 255, 0.02);
@@ -293,19 +314,26 @@
       box-shadow: var(--shadow);
     }
 
-    .stat-card {
-      padding: 1rem;
+    .hero-card,
+    .class-card,
+    .about-card,
+    .pillar-card,
+    .contact-card,
+    .embed-card,
+    .ig-card,
+    .panel {
+      padding: 1.3rem;
     }
 
-    .stat-card strong {
+    .hero-card strong {
       display: block;
-      font-size: 1.4rem;
-      color: var(--text);
+      font-size: 1.45rem;
+      margin-bottom: 0.15rem;
     }
 
-    .stat-card span {
+    .hero-card span {
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     .hero-visual {
@@ -356,7 +384,7 @@
       height: 74%;
       border-radius: 26px;
       background:
-        radial-gradient(circle at 50% 18%, rgba(220, 38, 38, 0.9), rgba(220, 38, 38, 0.08) 25%, transparent 30%),
+        radial-gradient(circle at 50% 18%, rgba(220, 38, 38, 0.92), rgba(220, 38, 38, 0.08) 25%, transparent 30%),
         radial-gradient(circle at 50% 58%, rgba(255, 255, 255, 0.1), transparent 54%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02)),
         #171717;
@@ -388,8 +416,8 @@
       clip-path: polygon(40% 0, 60% 0, 78% 16%, 100% 100%, 0 100%, 22% 16%);
       border-radius: 28px 28px 14px 14px;
       box-shadow:
-        70px 16px 0 -20px rgba(220, 38, 38, 0.66),
-        -70px 16px 0 -20px rgba(220, 38, 38, 0.66);
+        70px 16px 0 -20px rgba(220, 38, 38, 0.65),
+        -70px 16px 0 -20px rgba(220, 38, 38, 0.65);
     }
 
     .frame-note {
@@ -397,7 +425,7 @@
       left: 1.4rem;
       bottom: 1.4rem;
       z-index: 1;
-      max-width: 220px;
+      max-width: 240px;
       padding: 0.9rem 1rem;
       border-radius: 18px;
       background: rgba(0, 0, 0, 0.56);
@@ -406,7 +434,6 @@
 
     .frame-note strong {
       display: block;
-      font-size: 1rem;
       margin-bottom: 0.2rem;
     }
 
@@ -427,9 +454,8 @@
 
     .section-head h2 {
       margin: 0;
-      font-size: clamp(1.8rem, 6vw, 3rem);
+      font-size: clamp(1.85rem, 6vw, 3rem);
       letter-spacing: -0.04em;
-      text-transform: uppercase;
     }
 
     .section-head p {
@@ -438,164 +464,116 @@
       max-width: 42rem;
     }
 
-    .schedule-grid,
-    .trainer-grid,
-    .pricing-grid,
-    .contact-grid {
-      display: grid;
-      gap: 1rem;
+    .bilingual-title {
+      display: block;
+      color: var(--gold);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
     }
 
-    .schedule-card,
-    .trainer-card,
-    .price-card,
-    .contact-card,
-    .embed-card {
-      padding: 1.3rem;
-    }
-
-    .schedule-card .label,
-    .price-badge,
-    .trainer-role {
+    .class-card .label,
+    .mini-badge {
       display: inline-flex;
       padding: 0.38rem 0.75rem;
       border-radius: 999px;
       background: var(--accent-soft);
-      color: #ffb59f;
+      color: #ffb4b4;
       font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .schedule-card h3,
-    .trainer-card h3,
-    .price-card h3,
+    .class-card h3,
+    .about-card h3,
+    .pillar-card h3,
+    .contact-card h3,
     .embed-card h3,
-    .contact-card h3 {
-      margin: 0.95rem 0 0.6rem;
-      font-size: 1.3rem;
+    .ig-card h3 {
+      margin: 0.95rem 0 0.55rem;
+      font-size: 1.25rem;
     }
 
-    .schedule-card p,
-    .trainer-card p,
-    .price-card p,
+    .class-card p,
+    .about-card p,
+    .pillar-card p,
+    .contact-card p,
     .embed-card p,
-    .contact-card p {
+    .ig-card p {
       margin: 0;
       color: var(--muted);
     }
 
-    .schedule-times {
-      list-style: none;
-      padding: 0;
-      margin: 1.05rem 0 0;
-      display: grid;
-      gap: 0.65rem;
-    }
-
-    .schedule-times li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.8rem 0.95rem;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .trainer-card {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .trainer-card::before {
-      content: "";
-      position: absolute;
-      inset: auto -12% -26% auto;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(220, 38, 38, 0.2), transparent 68%);
-    }
-
-    .trainer-avatar {
-      width: 76px;
-      height: 76px;
-      display: grid;
-      place-items: center;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.86), rgba(127, 29, 29, 0.92));
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-    }
-
-    .trainer-highlights {
-      list-style: none;
-      padding: 0;
-      margin: 1rem 0 0;
-      display: grid;
-      gap: 0.55rem;
-      color: var(--text);
-    }
-
-    .trainer-highlights li::before,
-    .plan-features li::before,
-    .contact-list li::before {
-      content: "•";
-      color: var(--gold);
-      margin-right: 0.55rem;
-    }
-
-    .price-card {
-      position: relative;
-    }
-
-    .price-card.featured {
-      border-color: rgba(220, 38, 38, 0.5);
-      transform: translateY(-2px);
-      background:
-        linear-gradient(180deg, rgba(220, 38, 38, 0.16), rgba(255, 255, 255, 0.04)),
-        rgba(255, 255, 255, 0.02);
-    }
-
-    .price {
-      margin: 1rem 0 0.2rem;
-      display: flex;
-      align-items: flex-end;
-      gap: 0.35rem;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .price strong {
-      font-size: 2.4rem;
-      letter-spacing: -0.05em;
-    }
-
-    .price span {
-      color: var(--muted);
-    }
-
-    .plan-features,
-    .contact-list {
+    .class-meta,
+    .contact-list,
+    .notes-list {
       list-style: none;
       padding: 0;
       margin: 1rem 0 0;
       display: grid;
       gap: 0.6rem;
-      color: var(--muted);
     }
 
-    .contact-card a {
+    .class-meta li,
+    .contact-list li,
+    .notes-list li {
+      padding: 0.78rem 0.9rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .class-meta strong,
+    .contact-list strong {
+      display: block;
       color: var(--text);
+    }
+
+    .about-quote {
+      margin-top: 1rem;
+      padding: 1rem 1.05rem;
+      border-left: 3px solid var(--accent);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .ig-link {
+      margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pillar-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -14% -24% auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.18), transparent 70%);
+    }
+
+    .pillar-card .emoji {
+      font-size: 1.5rem;
+      display: inline-flex;
+      margin-bottom: 0.65rem;
     }
 
     .embed-shell {
       margin-top: 1rem;
-      min-height: 300px;
+      min-height: 280px;
       border-radius: 22px;
       border: 1px dashed rgba(255, 255, 255, 0.18);
       background:
@@ -621,10 +599,11 @@
       margin: 0 auto;
     }
 
-    .section-band {
-      margin-top: 1.25rem;
-      display: grid;
-      gap: 1rem;
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
     }
 
     .footer {
@@ -632,12 +611,14 @@
       color: var(--muted);
     }
 
-    .footer-shell {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+    .footer-grid {
       padding-top: 1.2rem;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-brand {
+      font-weight: 700;
+      color: var(--text);
     }
 
     .reveal {
@@ -657,11 +638,9 @@
       }
 
       .hero-meta,
-      .schedule-grid,
-      .trainer-grid,
-      .pricing-grid,
-      .contact-grid,
-      .section-band {
+      .classes-grid,
+      .pillars-grid,
+      .booking-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -700,32 +679,22 @@
         padding-top: 2.4rem;
       }
 
-      .schedule-grid {
+      .classes-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .about-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+      }
+
+      .pillars-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
-      .trainer-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .pricing-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        align-items: stretch;
-      }
-
-      .contact-grid {
-        grid-template-columns: 0.85fr 1.15fr;
-        align-items: start;
-      }
-
-      .section-band {
+      .contact-grid,
+      .booking-grid,
+      .footer-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .footer-shell {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
       }
     }
   </style>
@@ -733,9 +702,12 @@
 <body>
   <header class="site-header">
     <div class="container header-shell">
-      <a class="brand" href="#top" aria-label="Gym Boxing HK 首頁">
-        <span class="brand-mark">GB</span>
-        <span>Gym Boxing HK</span>
+      <a class="brand" href="#top" aria-label="Yamasaki Boxing HK 首頁">
+        <span class="brand-mark">YB</span>
+        <span class="brand-text">
+          <small>Hong Kong Boxing Gym</small>
+          <strong>Yamasaki Boxing HK</strong>
+        </span>
       </a>
 
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="切換導覽選單">
@@ -746,11 +718,11 @@
 
       <nav class="site-nav" id="site-nav" aria-label="主要導覽">
         <ul class="nav-list">
-          <li><a href="#schedule">課程時間表</a></li>
-          <li><a href="#trainers">教練團隊</a></li>
-          <li><a href="#pricing">收費方案</a></li>
-          <li><a href="#contact">聯絡我們</a></li>
-          <li><a href="#booking">立即預約</a></li>
+          <li><a href="#classes">課程</a></li>
+          <li><a href="#about">關於我們</a></li>
+          <li><a href="#gym-life">拳館日常</a></li>
+          <li><a href="#contact">聯絡</a></li>
+          <li><a href="#booking">預約</a></li>
         </ul>
       </nav>
     </div>
@@ -760,198 +732,180 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy reveal visible">
-          <span class="eyebrow">香港格鬥體能訓練</span>
-          <h1>精準訓練。實戰體能。每一下更有目的。</h1>
+          <span class="eyebrow">Authentic Local Boxing Gym</span>
+          <h1>拳擊，不只是運動</h1>
+          <p class="hero-subtitle">香港專業拳擊訓練 | Professional Boxing Training HK</p>
           <p>
-            Gym Boxing HK 提供高質素拳擊、泰拳與私人教練課程，在講求紀律與表現的訓練環境中，適合初學者、參賽者與忙碌上班族。
+            Yamasaki Boxing HK 以真實、社群感和教育導向為核心，專注推廣正確拳擊技術，陪你由基礎開始，
+            一步一步建立真正屬於自己的拳擊根基。
           </p>
 
           <div class="hero-actions">
-            <a class="cta-link cta-primary" href="#booking">預約課堂</a>
-            <a class="cta-link cta-secondary" href="#pricing">查看收費</a>
+            <a class="cta-link cta-primary" href="#booking">立即預約 / Book Now</a>
+            <a class="cta-link cta-secondary" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">Instagram</a>
           </div>
 
           <div class="hero-meta">
-            <div class="stat-card">
-              <strong>18+</strong>
-              <span>每週恆常課堂</span>
+            <div class="hero-card">
+              <strong>社群感 Community</strong>
+              <span>本地香港拳館文化，真實訓練氣氛。</span>
             </div>
-            <div class="stat-card">
-              <strong>3</strong>
-              <span>大訓練路線</span>
+            <div class="hero-card">
+              <strong>教育導向 Education</strong>
+              <span>由基礎做起，重視正確拳擊技術。</span>
             </div>
-            <div class="stat-card">
-              <strong>1:1</strong>
-              <span>可預約私人指導</span>
+            <div class="hero-card">
+              <strong>Mon-Sat</strong>
+              <span>早晨拳擊班，朝早開始一日。</span>
             </div>
-            <div class="stat-card">
-              <strong>Central</strong>
-              <span>香港核心地段</span>
+            <div class="hero-card">
+              <strong>@yamasaki_boxing_hk</strong>
+              <span>拳館內容、教學系列與日常更新。</span>
             </div>
           </div>
         </div>
 
         <div class="hero-visual reveal">
           <div class="hero-frame">
-            <span class="frame-tag">武術表現訓練館</span>
+            <span class="frame-tag">Yamasaki Boxing HK</span>
             <div class="hero-figure" aria-hidden="true"></div>
             <div class="frame-note">
-              <strong>重質不重量</strong>
-              <span>以系統化回合、教練帶領技術訓練與實戰體能，換來真正進步。</span>
+              <strong>你打中先諗速度</strong>
+              <span>從基礎開始，練出真正技術，而不只是流汗打卡。</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="content-section" id="schedule">
+    <section class="content-section" id="classes">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">課程時間表</span>
-          <h2>每週訓練時段</h2>
+          <span class="eyebrow">Classes</span>
+          <h2>課程安排<span class="bilingual-title">Training Programs</span></h2>
           <p>
-            按照你的目標選擇合適訓練，從拳擊技術回合、爆發力泰拳，到專注的一對一教學都涵蓋在內。
+            針對不同程度與目標，安排由早晨班、基礎課到私人訓練與對打課，讓你按自己節奏進步。
           </p>
         </div>
 
-        <div class="schedule-grid">
-          <article class="schedule-card reveal">
-            <span class="label">拳擊</span>
-            <h3>拳擊技術班</h3>
-            <p>專注步法、手靶回合、防守訓練與體能，建立俐落技術與上台信心。</p>
-            <ul class="schedule-times">
-              <li><span>星期一 / 星期三</span><strong>19:00</strong></li>
-              <li><span>星期六</span><strong>10:00</strong></li>
+        <div class="classes-grid">
+          <article class="class-card reveal">
+            <span class="label">Morning Boxing</span>
+            <h3>早晨拳擊班</h3>
+            <p>適合初學者，建立正確基礎。</p>
+            <ul class="class-meta">
+              <li><strong>時間 Time</strong>Mon-Sat 7am-9am</li>
+              <li><strong>適合對象</strong>Morning routine, beginner friendly</li>
             </ul>
           </article>
 
-          <article class="schedule-card reveal">
-            <span class="label">泰拳</span>
-            <h3>打擊與箍頸</h3>
-            <p>涵蓋踢、膝、肘與箍頸基本功，配合沙包回合與雙人訓練，全面提升格鬥體能。</p>
-            <ul class="schedule-times">
-              <li><span>星期二 / 星期四</span><strong>19:30</strong></li>
-              <li><span>星期日</span><strong>11:00</strong></li>
+          <article class="class-card reveal">
+            <span class="label">Boxing Fundamentals</span>
+            <h3>拳擊基礎課</h3>
+            <p>你打中先諗速度。</p>
+            <ul class="class-meta">
+              <li><strong>重點 Focus</strong>基本步法、出拳、距離與節奏</li>
+              <li><strong>程度 Level</strong>All levels welcome</li>
             </ul>
           </article>
 
-          <article class="schedule-card reveal">
-            <span class="label">私人訓練</span>
-            <h3>教練一對一課程</h3>
-            <p>按需要度身安排，適合修正技術、減重目標、初學入門或比賽前備戰。</p>
-            <ul class="schedule-times">
-              <li><span>平日</span><strong>預約安排</strong></li>
-              <li><span>週末</span><strong>名額有限</strong></li>
+          <article class="class-card reveal">
+            <span class="label">Private Training</span>
+            <h3>私人訓練</h3>
+            <p>1-on-1 with coach, flexible schedule.</p>
+            <ul class="class-meta">
+              <li><strong>安排 Schedule</strong>可按雙方時間彈性預約</li>
+              <li><strong>適合對象</strong>想快速改善技術或定制訓練內容</li>
+            </ul>
+          </article>
+
+          <article class="class-card reveal">
+            <span class="label">Sparring</span>
+            <h3>對打課</h3>
+            <p>For intermediate and above students.</p>
+            <ul class="class-meta">
+              <li><strong>要求 Requirement</strong>需有一定基本功與控制能力</li>
+              <li><strong>重點 Focus</strong>實戰節奏、判斷與距離感</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="content-section" id="trainers">
+    <section class="content-section" id="about">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">教練團隊</span>
-          <h2>實戰經驗教練陣容</h2>
-          <p>
-            我們的教練結合實戰經驗、系統化教學與可追蹤進度，讓每一回合都有明確目的。
-          </p>
+          <span class="eyebrow">About Us</span>
+          <h2>關於我們<span class="bilingual-title">About Yamasaki Boxing HK</span></h2>
         </div>
 
-        <div class="trainer-grid">
-          <article class="trainer-card reveal">
-            <div class="trainer-avatar">KC</div>
-            <span class="trainer-role">拳擊總教練</span>
-            <h3>Ken Chan</h3>
-            <p>前業餘拳擊選手，專長是紮實基本功、有效率移動與高精準手靶訓練。</p>
-            <ul class="trainer-highlights">
-              <li>12 年教學經驗</li>
-              <li>擅長設計初階至中階進程</li>
-              <li>重視步法與防守細節</li>
-            </ul>
+        <div class="about-grid">
+          <article class="about-card reveal">
+            <h3>由基礎開始，建立真正拳擊根基</h3>
+            <p>
+              Yamasaki Boxing HK 致力於推廣正確拳擊技術。
+              我們相信：你打中先諗速度。
+              由基礎開始，建立真正的拳擊根基。
+            </p>
+            <div class="about-quote">
+              Authentic, community-focused, educational.
+              本地香港拳館，不走花巧包裝，專注教學與真實訓練。
+            </div>
+            <a class="ig-link" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">
+              @yamasaki_boxing_hk
+            </a>
           </article>
 
-          <article class="trainer-card reveal">
-            <div class="trainer-avatar">AL</div>
-            <span class="trainer-role">泰拳教練</span>
-            <h3>Ari Lo</h3>
-            <p>泰拳專項教練，強項是俐落連招、箍頸控制，以及兼顧技術的高效率體能課。</p>
-            <ul class="trainer-highlights">
-              <li>採用備戰營式手靶回合</li>
-              <li>專注箍頸與打擊力學</li>
-              <li>可按程度調整強度</li>
-            </ul>
-          </article>
-
-          <article class="trainer-card reveal">
-            <div class="trainer-avatar">MS</div>
-            <span class="trainer-role">私人表現教練</span>
-            <h3>Maya Szeto</h3>
-            <p>專注為忙碌上班族安排私人課，針對技術提升與運動表現作精準訓練。</p>
-            <ul class="trainer-highlights">
-              <li>一對一個人化訓練方案</li>
-              <li>結合力量與耐力提升</li>
-              <li>以技術檢討配合進度目標</li>
-            </ul>
+          <article class="ig-card reveal">
+            <span class="mini-badge">Instagram Feed</span>
+            <h3>追蹤拳館最新內容</h3>
+            <p>
+              想睇教學影片、早晨班日常同真實 gym 生活，可以直接到 Instagram 追蹤最新更新。
+            </p>
+            <div class="embed-shell" role="img" aria-label="Instagram 預留區">
+              <div>
+                <strong>@yamasaki_boxing_hk</strong>
+                <span>點擊前往 Instagram 查看真實內容、教學系列與拳館日常。</span>
+                <div style="margin-top: 1rem;">
+                  <a class="cta-link cta-primary" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">查看 Instagram</a>
+                </div>
+              </div>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="content-section" id="pricing">
+    <section class="content-section" id="gym-life">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">收費方案</span>
-          <h2>為穩定訓練而設的會籍</h2>
+          <span class="eyebrow">Gym Life</span>
+          <h2>拳館日常<span class="bilingual-title">What You See On Our Instagram</span></h2>
           <p>
-            按你的訓練頻率選擇合適方案。每個級別都包含教練支援與清晰的訓練進程。
+            從教學、晨操到真實訓練生活，Yamasaki Boxing HK 的內容不是擺拍，而是拳館真正發生的事。
           </p>
         </div>
 
-        <div class="pricing-grid">
-          <article class="price-card reveal">
-            <span class="price-badge">入門</span>
-            <h3>基礎訓練</h3>
-            <p>適合新手建立習慣與信心。</p>
-            <div class="price">
-              <strong>HK$880</strong>
-              <span>/ 月</span>
-            </div>
-            <ul class="plan-features">
-              <li>每月 4 節小組課</li>
-              <li>可選拳擊或泰拳課堂</li>
-              <li>包含首次教練評估</li>
-            </ul>
+        <div class="pillars-grid">
+          <article class="pillar-card reveal">
+            <span class="emoji">🥊</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>拳擊補習社</h3>
+            <p>教學影片系列，拆解正確技術觀念，讓你知道點樣先算真正打得準、打得快。</p>
           </article>
 
-          <article class="price-card featured reveal">
-            <span class="price-badge">最受歡迎</span>
-            <h3>進階常規</h3>
-            <p>最適合每週穩定訓練與持續進步。</p>
-            <div class="price">
-              <strong>HK$1,680</strong>
-              <span>/ 月</span>
-            </div>
-            <ul class="plan-features">
-              <li>小組課無限上堂</li>
-              <li>每月 1 節私人訓練</li>
-              <li>優先預約時段</li>
-            </ul>
+          <article class="pillar-card reveal">
+            <span class="emoji">🌅</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>早晨拳擊班</h3>
+            <p>朝早開始一日，用專注訓練開機，建立穩定生活節奏與身體狀態。</p>
           </article>
 
-          <article class="price-card reveal">
-            <span class="price-badge">高階</span>
-            <h3>表現提升計劃</h3>
-            <p>適合希望獲得個人化教學並加快進步的會員。</p>
-            <div class="price">
-              <strong>HK$3,280</strong>
-              <span>/ 月</span>
-            </div>
-            <ul class="plan-features">
-              <li>小組課無限上堂</li>
-              <li>4 節私人訓練</li>
-              <li>個人化技術進程規劃</li>
-            </ul>
+          <article class="pillar-card reveal">
+            <span class="emoji">🤜</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>拳館日常</h3>
+            <p>真實 gym 生活，看到學員進步、教練互動、課堂氣氛與本地拳館文化。</p>
           </article>
         </div>
       </div>
@@ -960,32 +914,34 @@
     <section class="content-section" id="contact">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">到訪拳館</span>
-          <h2>在香港核心地段投入訓練</h2>
+          <span class="eyebrow">Contact</span>
+          <h2>聯絡我們<span class="bilingual-title">Visit or Message Us</span></h2>
           <p>
-            如需查詢體驗課、私人訓練或會籍詳情，可直接聯絡我們。確定地址後可把下方替換成 Google Maps 嵌入地圖。
+            如想查詢課堂、私人訓練或初學安排，可透過 Instagram 或 WhatsApp 聯絡。地點以香港為主，下方保留 Google Maps placeholder。
           </p>
         </div>
 
         <div class="contact-grid">
           <article class="contact-card reveal">
-            <h3>聯絡資料</h3>
-            <p>高標準教學、專業設備，以及專注訓練的拳館氛圍。</p>
+            <h3>聯絡方式 Contact Info</h3>
             <ul class="contact-list">
-              <li><a href="tel:+85223456789">+852 2345 6789</a></li>
-              <li><a href="mailto:hello@gymboxinghk.com">hello@gymboxinghk.com</a></li>
-              <li>香港中環格鬥大樓 12 樓</li>
-              <li>星期一至五：07:00 - 22:00，星期六至日：09:00 - 19:00</li>
+              <li><strong>Instagram</strong><a href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">instagram.com/yamasaki_boxing_hk</a></li>
+              <li><strong>WhatsApp Enquiry</strong><a href="https://wa.me/85291234567" target="_blank" rel="noreferrer">+852 9123 4567</a></li>
+              <li><strong>Location</strong>Hong Kong</li>
             </ul>
+            <div class="contact-actions">
+              <a class="cta-link cta-primary" href="https://wa.me/85291234567" target="_blank" rel="noreferrer">WhatsApp 查詢</a>
+              <a class="cta-link cta-secondary" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">Instagram</a>
+            </div>
           </article>
 
           <article class="embed-card reveal">
-            <h3>Google Maps 嵌入預留區</h3>
-            <p>確認最終地址後，可把此區替換為實際的 Google Maps iframe 嵌入碼。</p>
+            <h3>Google Maps Placeholder</h3>
+            <p>待確認具體地址後，可把這裡替換成實際 Google Maps iframe。</p>
             <div class="embed-shell" role="img" aria-label="Google Maps 預留區">
               <div>
-                <strong>Google Maps 預留區</strong>
-                <span>把 Google Maps iframe 嵌入碼貼到這裡，即可顯示拳館位置與路線指引。</span>
+                <strong>Hong Kong Location Placeholder</strong>
+                <span>Replace with Google Maps embed for the gym address in Hong Kong.</span>
               </div>
             </div>
           </article>
@@ -996,35 +952,30 @@
     <section class="content-section" id="booking">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow">立即預約</span>
-          <h2>預約課堂或諮詢時段</h2>
+          <span class="eyebrow">Booking</span>
+          <h2>立即預約<span class="bilingual-title">Book a Class or Enquiry Slot</span></h2>
           <p>
-            你可透過下方預約頁面安排體驗課、會籍課堂或私人訓練。整個流程會直接在瀏覽器中運作並顯示即時名額。
+            保留現有 Cal.com booking placeholder。你可稍後把正式的 Cal.com inline embed 直接貼到這個區塊。
           </p>
         </div>
 
-        <div class="section-band">
-          <article class="panel reveal" style="padding: 1.3rem;">
-            <h3 style="margin-top: 0;">首次到訪須知</h3>
-            <p style="margin: 0; color: var(--muted);">首次來訪可獲簡短場地介紹、綁手帶指導，以及整節課堂中的教練支援。</p>
-            <ul class="plan-features">
-              <li>請自備飲用水與運動服裝</li>
-              <li>現場可租借拳套</li>
-              <li>建議於課堂前 15 分鐘到達</li>
+        <div class="booking-grid">
+          <article class="panel reveal">
+            <h3 style="margin-top: 0;">首次來館小提示</h3>
+            <ul class="notes-list">
+              <li>初學者亦可參加，建議先由基礎課或早晨班開始。</li>
+              <li>如想更針對個人目標，可考慮私人訓練。</li>
+              <li>預約前可先透過 Instagram / WhatsApp 查詢。</li>
             </ul>
           </article>
 
           <article class="embed-card reveal">
-            <h3>線上預約頁面</h3>
-            <p>開啟專屬預約介面，選擇課程類型、日期與時段，並把預約紀錄保存到本機瀏覽器。</p>
-            <div class="embed-shell" aria-label="預約頁面連結">
+            <h3>Cal.com Booking Placeholder</h3>
+            <p>Replace this block with your Cal.com inline embed snippet for live appointment booking.</p>
+            <div class="embed-shell" role="img" aria-label="Cal.com booking placeholder">
               <div>
-                <strong>開啟預約流程</strong>
-                <span>使用預約頁面安排課堂，並透過受密碼保護的管理頁面查看與管理本機預約資料。</span>
-                <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
-                  <a class="cta-link cta-primary" href="booking.html">立即預約</a>
-                  <a class="cta-link cta-secondary" href="admin.html">管理後台</a>
-                </div>
+                <strong>Cal.com Booking Placeholder</strong>
+                <span>Insert your Cal.com embed code here to let visitors book classes or private sessions directly.</span>
               </div>
             </div>
           </article>
@@ -1034,9 +985,14 @@
   </main>
 
   <footer class="footer">
-    <div class="container footer-shell">
-      <div>Gym Boxing HK</div>
-      <div>香港專業拳擊與武術訓練體驗。</div>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">© 2025 Yamasaki Boxing HK</div>
+        <div>你打中先諗速度</div>
+      </div>
+      <div>
+        <div>Instagram: <a href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">@yamasaki_boxing_hk</a></div>
+      </div>
     </div>
   </footer>
 
