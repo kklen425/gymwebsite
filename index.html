@@ -599,6 +599,75 @@
       margin: 0 auto;
     }
 
+    #booking .booking-grid {
+      display: none;
+    }
+
+    .booking-cards-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .booking-class-card {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.3rem;
+      display: grid;
+      gap: 0.9rem;
+      align-content: start;
+    }
+
+    .booking-class-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.35;
+    }
+
+    .booking-class-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .booking-class-meta {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 0.38rem 0.75rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #ffb4b4;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cal-embed-wrap {
+      margin-top: 1rem;
+      min-height: 680px;
+      height: 78vh;
+      max-height: 900px;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+        #0c0c0c;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    #my-cal-inline-對打課-sparring {
+      width: 100% !important;
+      height: 100% !important;
+      overflow: auto !important;
+      border-radius: 22px;
+      color-scheme: dark;
+    }
+
     .contact-actions {
       display: flex;
       flex-wrap: wrap;
@@ -640,7 +709,8 @@
       .hero-meta,
       .classes-grid,
       .pillars-grid,
-      .booking-grid {
+      .booking-grid,
+      .booking-cards-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -696,6 +766,17 @@
       .footer-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .booking-cards-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 719px) {
+      .cal-embed-wrap {
+        min-height: 620px;
+        height: 72vh;
+      }
     }
   </style>
 </head>
@@ -723,6 +804,7 @@
           <li><a href="#gym-life">拳館日常</a></li>
           <li><a href="#contact">聯絡</a></li>
           <li><a href="#booking">預約</a></li>
+          <li><a href="my-booking.html">查看我的預約</a></li>
         </ul>
       </nav>
     </div>
@@ -959,6 +1041,36 @@
           </p>
         </div>
 
+        <div class="booking-cards-grid">
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">60 min</span>
+            <h3>早晨拳擊班<br>Morning Boxing</h3>
+            <p>適合晨早開操與建立穩定節奏的學員，從基本動作與身體狀態開始。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約 Book Now</a>
+          </article>
+
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">60 min</span>
+            <h3>拳擊基礎課<br>Boxing Fundamentals</h3>
+            <p>由步法、出拳、節奏到距離控制，適合想打好根基的學員。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約 Book Now</a>
+          </article>
+
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">45 min</span>
+            <h3>私人訓練<br>Private Training</h3>
+            <p>一對一訓練安排，按你的技術程度、目標與時間作個人化調整。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約 Book Now</a>
+          </article>
+
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">60 min</span>
+            <h3>對打課<br>Sparring</h3>
+            <p>為有一定基礎的學員而設，重視節奏、判斷、距離與實戰控制。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約 Book Now</a>
+          </article>
+        </div>
+
         <div class="booking-grid">
           <article class="panel reveal">
             <h3 style="margin-top: 0;">首次來館小提示</h3>
@@ -970,13 +1082,22 @@
           </article>
 
           <article class="embed-card reveal">
-            <h3>Cal.com Booking Placeholder</h3>
-            <p>Replace this block with your Cal.com inline embed snippet for live appointment booking.</p>
-            <div class="embed-shell" role="img" aria-label="Cal.com booking placeholder">
-              <div>
-                <strong>Cal.com Booking Placeholder</strong>
-                <span>Insert your Cal.com embed code here to let visitors book classes or private sessions directly.</span>
-              </div>
+            <h3>線上預約 / Cal Booking</h3>
+            <p>對打課 Sparring 的即時預約表，已直接嵌入頁面並包在深色容器中，方便手機用戶操作。</p>
+            <div class="cal-embed-wrap" aria-label="Cal.com inline booking embed">
+              <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-對打課-sparring"></div>
+              <script type="text/javascript">
+                (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+                Cal("init", "對打課-sparring", {origin:"https://app.cal.com"});
+
+                Cal.ns["對打課-sparring"]("inline", {
+                  elementOrSelector:"#my-cal-inline-對打課-sparring",
+                  config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+                  calLink: "julian-alvarez-rttvmb/對打課-sparring",
+                });
+
+                Cal.ns["對打課-sparring"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+              </script>
             </div>
           </article>
         </div>
