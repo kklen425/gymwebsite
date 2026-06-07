@@ -1,0 +1,1559 @@
+<!DOCTYPE html><html lang="zh-Hant"><head>
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <template id="__bundler_thumbnail" data-bg-color="#080808">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#080808"></rect>
+      <g transform="translate(360 180)">
+        <rect x="0" y="0" width="480" height="440" fill="none" stroke="#ead9b6" stroke-width="3"></rect>
+        <rect x="36" y="36" width="180" height="40" fill="#e5231f"></rect>
+        <text x="240" y="240" font-family="Oswald, sans-serif" font-size="96" font-weight="700" fill="#f2ede1" text-anchor="middle" dominant-baseline="middle">YB</text>
+        <rect x="180" y="300" width="120" height="6" fill="#e5231f"></rect>
+      </g>
+      <text x="600" y="700" font-family="JetBrains Mono, monospace" font-size="22" letter-spacing="6" fill="#70685d" text-anchor="middle">YAMASAKI BOXING HK</text>
+    </svg>
+  </template>
+  <title>Yamasaki Boxing HK — 拳擊，不只是運動</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --bg-elevated: #101010;
+      --surface: rgba(255, 255, 255, 0.035);
+      --surface-2: rgba(255, 255, 255, 0.055);
+      --text: #f2ede1;
+      --muted: #a9a194;
+      --muted-2: #70685d;
+      --line: rgba(255, 255, 255, 0.09);
+      --line-strong: rgba(255, 255, 255, 0.18);
+      --accent: #e5231f;
+      --accent-strong: #ff3a2e;
+      --accent-deep: #7a1210;
+      --accent-soft: rgba(229, 35, 31, 0.14);
+      --bone: #ead9b6;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      --content-width: 1200px;
+      --nav-height: 72px;
+
+      --font-display: "Oswald", "Noto Sans TC", "PingFang TC", sans-serif;
+      --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* --- Background layers: subtle grain + vignettes --- */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 85% 0%, rgba(229, 35, 31, 0.18), transparent 70%),
+        radial-gradient(ellipse 50% 50% at 10% 10%, rgba(234, 217, 182, 0.04), transparent 60%),
+        linear-gradient(180deg, #0d0b0a 0%, #080808 40%, #040404 100%);
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+
+    main, .site-header, .footer { position: relative; z-index: 1; }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--content-width));
+      margin: 0 auto;
+    }
+
+    /* ---------- HEADER ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(8, 8, 8, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-shell {
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+    }
+
+    .brand-text {
+      line-height: 1.15;
+    }
+
+    .brand-text small {
+      display: block;
+      color: var(--muted-2);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .nav-toggle {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      height: 1.5px;
+      background: currentColor;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .site-nav {
+      position: absolute;
+      inset: calc(100% + 1px) 1rem auto;
+      padding: 0.75rem;
+      border: 1px solid var(--line-strong);
+      background: rgba(10, 10, 10, 0.98);
+      box-shadow: var(--shadow);
+      display: none;
+    }
+    .site-nav.open { display: block; }
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.1rem;
+    }
+
+    .nav-list a {
+      display: block;
+      padding: 0.7rem 0.9rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      border-left: 2px solid transparent;
+    }
+    .nav-list a:hover,
+    .nav-list a.active {
+      color: var(--text);
+      background: var(--surface);
+      border-left-color: var(--accent);
+    }
+
+    /* ---------- CTAs ---------- */
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 48px;
+      padding: 0 1.25rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .cta-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 0 var(--accent-deep), 0 16px 30px rgba(229, 35, 31, 0.25);
+    }
+    .cta-primary:hover {
+      background: var(--accent-strong);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 0 var(--accent-deep), 0 20px 34px rgba(229, 35, 31, 0.3);
+    }
+    .cta-primary:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 0 var(--accent-deep), 0 6px 14px rgba(229, 35, 31, 0.2);
+    }
+
+    .cta-secondary {
+      color: var(--text);
+      border-color: var(--line-strong);
+      background: transparent;
+    }
+    .cta-secondary:hover {
+      border-color: var(--bone);
+      background: rgba(255, 255, 255, 0.03);
+      transform: translateY(-2px);
+    }
+
+    main { overflow: hidden; }
+
+    section { scroll-margin-top: calc(var(--nav-height) + 20px); }
+
+    /* ---------- DISPLAY TYPE ---------- */
+    .display {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.35rem 0.7rem;
+      font-family: var(--font-mono);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--bone);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .bilingual-title {
+      display: block;
+      color: var(--muted-2);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 0.6rem;
+      line-height: 1.4;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative;
+      padding: 3rem 0 2.5rem;
+    }
+
+    .hero-grid,
+    .classes-grid,
+    .about-grid,
+    .pillars-grid,
+    .contact-grid,
+    .booking-grid,
+    .footer-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-copy h1 {
+      margin: 1.1rem 0 1rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(3rem, 11vw, 6.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy h1 .accent {
+      color: var(--accent);
+      display: inline-block;
+    }
+
+    .hero-copy p.lead {
+      margin: 0;
+      max-width: 36rem;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .hero-subtitle {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--bone);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+      margin: 0.9rem 0 1rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.6rem;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .hero-card {
+      padding: 0.25rem 0;
+    }
+
+    .hero-card strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+    }
+
+    .hero-card span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Hero visual: striped SVG placeholder with mono caption */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: #0a0a0a;
+      border: 1px solid var(--line-strong);
+      overflow: hidden;
+    }
+
+    .hero-frame svg.stripes {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-frame .frame-corner {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--bone);
+    }
+    .hero-frame .frame-corner.tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+    .hero-frame .frame-corner.tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
+    .hero-frame .frame-corner.bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
+    .hero-frame .frame-corner.br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
+
+    .hero-frame .frame-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem 1.1rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--bone);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .hero-frame .frame-caption .label {
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .hero-frame .frame-tag {
+      position: absolute;
+      top: 16px;
+      left: 40px;
+      padding: 0.35rem 0.7rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero-frame .frame-stat {
+      position: absolute;
+      top: 16px;
+      right: 40px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero-frame .frame-quote {
+      position: absolute;
+      left: 36px;
+      right: 36px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.8rem, 4.2vw, 2.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      pointer-events: none;
+    }
+
+    .hero-frame .frame-quote em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-frame .frame-quote .sub {
+      display: block;
+      margin-top: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ---------- SECTIONS ---------- */
+    .content-section {
+      padding: 2rem 0 1rem;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 0.9rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2rem, 6.5vw, 3.4rem);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 44rem;
+    }
+
+    /* ---------- CLASSES: fight-card style ---------- */
+    .classes-grid {
+      gap: 0;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .class-card {
+      position: relative;
+      padding: 1.5rem 1.4rem 1.6rem;
+      border-bottom: 1px solid var(--line);
+      transition: background-color 0.25s ease;
+    }
+    .class-card:last-child { border-bottom: 0; }
+    .class-card:hover { background: var(--surface-2); }
+
+    .class-num {
+      position: absolute;
+      top: 1.3rem;
+      right: 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--muted-2);
+    }
+
+    .class-card .label {
+      display: inline-block;
+      padding: 0.28rem 0.6rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent-strong);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .class-card h3 {
+      margin: 1rem 0 0.5rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.5rem;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+
+    .class-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .class-meta {
+      list-style: none;
+      padding: 0;
+      margin: 1.1rem 0 0;
+      display: grid;
+      gap: 0;
+      border-top: 1px dashed var(--line);
+    }
+
+    .class-meta li {
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed var(--line);
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0.75rem;
+      align-items: baseline;
+    }
+    .class-meta li:last-child { border-bottom: 0; }
+
+    .class-meta strong {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    /* ---------- ABOUT ---------- */
+    .about-card,
+    .ig-card,
+    .pillar-card,
+    .contact-card,
+    .embed-card,
+    .panel,
+    .booking-class-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 1.5rem 1.4rem;
+      transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .about-card:hover,
+    .ig-card:hover,
+    .pillar-card:hover,
+    .contact-card:hover,
+    .embed-card:hover,
+    .booking-class-card:hover {
+      border-color: var(--line-strong);
+      background: var(--surface-2);
+    }
+
+    .about-card h3,
+    .pillar-card h3,
+    .contact-card h3,
+    .embed-card h3,
+    .ig-card h3,
+    .panel h3,
+    .booking-class-card h3 {
+      margin: 0.4rem 0 0.5rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+
+    .about-card p,
+    .pillar-card p,
+    .contact-card p,
+    .embed-card p,
+    .ig-card p,
+    .booking-class-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .about-quote {
+      margin-top: 1.25rem;
+      padding: 1rem 1.1rem;
+      border-left: 2px solid var(--accent);
+      background: rgba(229, 35, 31, 0.04);
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .about-quote em {
+      display: block;
+      font-family: var(--font-mono);
+      font-style: normal;
+      font-size: 0.72rem;
+      color: var(--bone);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .ig-link {
+      margin-top: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--bone);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+    .ig-link:hover { color: var(--accent-strong); }
+    .ig-link::after {
+      content: "→";
+      transition: transform 0.25s ease;
+    }
+    .ig-link:hover::after { transform: translateX(4px); }
+
+    .mini-badge {
+      display: inline-block;
+      padding: 0.25rem 0.55rem;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      color: var(--bone);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ---------- PILLARS ---------- */
+    .pillar-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar-card .pillar-num {
+      position: absolute;
+      top: 0.9rem;
+      right: 1.1rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 3.4rem;
+      line-height: 1;
+      color: var(--surface-2);
+      user-select: none;
+    }
+
+    /* ---------- EMBED PLACEHOLDERS ---------- */
+    .embed-shell {
+      margin-top: 1.1rem;
+      min-height: 240px;
+      border: 1px solid var(--line);
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          rgba(255, 255, 255, 0.018),
+          rgba(255, 255, 255, 0.018) 8px,
+          transparent 8px,
+          transparent 16px
+        ),
+        #0a0a0a;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .embed-shell::before {
+      content: "[ placeholder ]";
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.14em;
+      color: var(--muted-2);
+      text-transform: uppercase;
+    }
+
+    .embed-shell strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+      color: var(--text);
+    }
+
+    .embed-shell span {
+      display: block;
+      color: var(--muted);
+      max-width: 24rem;
+      margin: 0 auto;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- BOOKING ---------- */
+    #booking .booking-grid {
+      display: none;
+    }
+
+    .booking-cards-grid {
+      display: grid;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .booking-class-card {
+      display: grid;
+      gap: 0.7rem;
+      align-content: start;
+      position: relative;
+    }
+
+    .booking-class-card h3 {
+      font-size: 1.15rem;
+    }
+
+    .booking-class-meta {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 0.26rem 0.55rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .booking-class-card .cta-link {
+      margin-top: 0.5rem;
+      justify-self: start;
+    }
+
+    .cal-embed-wrap {
+      margin-top: 1rem;
+      min-height: 680px;
+      height: 78vh;
+      max-height: 900px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #0a0a0a;
+    }
+
+    #my-cal-inline-對打課-sparring {
+      width: 100% !important;
+      height: 100% !important;
+      overflow: auto !important;
+      color-scheme: dark;
+    }
+
+    /* ---------- CONTACT ---------- */
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-list li {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0.75rem;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .contact-list strong {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .contact-list a {
+      color: var(--text);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .contact-list a:hover {
+      color: var(--accent-strong);
+      border-bottom-color: var(--accent-strong);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+    }
+
+    /* ---------- NOTES (booking tips) ---------- */
+    .notes-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      counter-reset: note;
+    }
+
+    .notes-list li {
+      padding: 0.9rem 0 0.9rem 2.2rem;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.93rem;
+      color: var(--muted);
+      position: relative;
+      counter-increment: note;
+    }
+    .notes-list li:last-child { border-bottom: 0; }
+    .notes-list li::before {
+      content: "0" counter(note);
+      position: absolute;
+      left: 0;
+      top: 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      padding: 3rem 0 2.5rem;
+      margin-top: 2rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      padding-top: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .footer-motto {
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .footer a {
+      color: var(--text);
+      border-bottom: 1px solid var(--line);
+    }
+    .footer a:hover { color: var(--accent-strong); border-bottom-color: var(--accent-strong); }
+
+    /* ---------- REVEAL ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- MARQUEE (subtle motto band) ---------- */
+    .marquee {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 1rem 0;
+      background: var(--bg);
+      margin-top: 2rem;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 2.5rem;
+      animation: marquee 40s linear infinite;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .marquee-track span {
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5rem;
+      white-space: nowrap;
+    }
+    .marquee-track span::after {
+      content: "✦";
+      color: var(--accent);
+      font-size: 0.7em;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (min-width: 720px) {
+      .hero { padding: 4.5rem 0 3rem; }
+      .hero-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; }
+      .classes-grid,
+      .pillars-grid,
+      .booking-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .classes-grid .class-card {
+        border-right: 1px solid var(--line);
+      }
+      .classes-grid .class-card:nth-child(2n) {
+        border-right: 0;
+      }
+      .classes-grid .class-card:nth-last-child(-n+2) {
+        border-bottom: 0;
+      }
+    }
+
+    @media (min-width: 980px) {
+      .nav-toggle { display: none; }
+      .site-nav {
+        position: static;
+        inset: auto;
+        display: block;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      .nav-list {
+        display: flex;
+        align-items: center;
+        gap: 0;
+      }
+      .nav-list a {
+        padding: 0.7rem 0.95rem;
+        border-left: 0;
+        border-bottom: 2px solid transparent;
+      }
+      .nav-list a:hover,
+      .nav-list a.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--accent);
+      }
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+        align-items: stretch;
+        gap: 2.5rem;
+      }
+      .content-section { padding-top: 3.5rem; }
+      .classes-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .classes-grid .class-card {
+        border-right: 1px solid var(--line);
+        border-bottom: 0;
+      }
+      .classes-grid .class-card:nth-child(2n) {
+        border-right: 1px solid var(--line);
+      }
+      .classes-grid .class-card:last-child {
+        border-right: 0;
+      }
+      .about-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 1.5rem;
+      }
+      .pillars-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+      .contact-grid,
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+      .booking-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+        display: grid !important;
+      }
+      #booking .booking-grid {
+        display: grid !important;
+      }
+      .booking-cards-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 719px) {
+      .cal-embed-wrap {
+        min-height: 620px;
+        height: 72vh;
+      }
+      .hero-copy h1 { font-size: clamp(2.6rem, 13vw, 4.4rem); }
+      .hero-frame .frame-quote { font-size: clamp(1.4rem, 7vw, 2rem); }
+    }
+  </style>
+<script src="https://app.cal.com/embed/embed.js"></script><style>.cal-embed{border:0px;min-height:300px;margin:0 auto;width:100%;display:block!important;color-scheme:unset!important}</style></head>
+<body style="cursor: crosshair; background-color: rgb(8, 8, 8);" data-cc-id="cc-1">
+  <header class="site-header">
+    <div class="container header-shell">
+      <a class="brand" href="#top" aria-label="Yamasaki Boxing HK 首頁">
+        <span class="brand-mark">YB</span>
+        <span class="brand-text">
+          <small>Hong Kong Boxing Gym / EST.</small>
+          <strong>Yamasaki Boxing HK</strong>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="切換導覽選單">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="主要導覽">
+        <ul class="nav-list">
+          <li><a href="#classes">Classes / 課程</a></li>
+          <li><a href="#about">About / 關於</a></li>
+          <li><a href="#gym-life">Gym Life / 日常</a></li>
+          <li><a href="#contact">Contact / 聯絡</a></li>
+          <li><a href="#booking">Book / 預約</a></li>
+          <li><a href="my-booking.html">My Booking</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ======= HERO ======= -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal visible">
+          <span class="eyebrow">Authentic Local Boxing Gym</span>
+          <h1>
+            拳擊，<br>
+            不只是<span class="accent">運動</span>
+          </h1>
+          <p class="hero-subtitle">Professional Boxing Training · Hong Kong</p>
+          <div class="hero-divider"></div>
+          <p class="lead">
+            以真實、社群感和教育導向為核心，專注推廣正確拳擊技術。由基礎開始，一步一步建立真正屬於自己的拳擊根基。
+          </p>
+
+          <div class="hero-actions">
+            <a class="cta-link cta-primary" href="#booking">立即預約 · Book Now</a>
+            <a class="cta-link cta-secondary" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">Instagram ↗</a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="hero-card">
+              <strong>Community / 社群</strong>
+              <span>本地香港拳館文化，真實訓練氣氛。</span>
+            </div>
+            <div class="hero-card">
+              <strong>Education / 教育</strong>
+              <span>由基礎做起，重視正確拳擊技術。</span>
+            </div>
+            <div class="hero-card">
+              <strong>Mon-Sat / 週一至六</strong>
+              <span>早晨拳擊班，朝早開始一日。</span>
+            </div>
+            <div class="hero-card">
+              <strong>@yamasaki_boxing_hk</strong>
+              <span>拳館內容、教學系列與日常更新。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal visible">
+          <div class="hero-frame">
+            <!-- Real training photo with red tint + grain overlay -->
+            <img class="hero-photo" src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=900&q=80" alt="Boxing training" loading="lazy" />
+            <div class="hero-photo-tint" aria-hidden="true"></div>
+
+            <span class="frame-corner tl"></span>
+            <span class="frame-corner tr"></span>
+            <span class="frame-corner bl"></span>
+            <span class="frame-corner br"></span>
+
+            <span class="frame-tag">Yamasaki · HK</span>
+            <span class="frame-stat">REC · 00:12</span>
+
+            <div class="frame-quote">
+              你打中<br>先諗<em>速度</em>
+              <span class="sub">Land the punch first.</span>
+            </div>
+
+            <div class="frame-caption">
+              <span class="label">// drop gym photo / training shot here</span>
+              <span>01 / HERO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= MARQUEE BAND ======= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Authentic</span>
+        <span>Community</span>
+        <span>Education</span>
+        <span>你打中先諗速度</span>
+        <span>Hong Kong</span>
+        <span>Boxing</span>
+        <span>Authentic</span>
+        <span>Community</span>
+        <span>Education</span>
+        <span>你打中先諗速度</span>
+        <span>Hong Kong</span>
+        <span>Boxing</span>
+      </div>
+    </div>
+
+    <!-- ======= CLASSES ======= -->
+    <section class="content-section" id="classes">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">01 · Classes</span>
+          <h2>課程安排<span class="bilingual-title">Training Programs / Find your fit</span></h2>
+          <p>
+            針對不同程度與目標，安排由早晨班、基礎課到私人訓練與對打課，讓你按自己節奏進步。
+          </p>
+        </div>
+
+        <div class="classes-grid">
+          <article class="class-card reveal">
+            <span class="class-num">№ 01</span>
+            <span class="label">Morning Boxing</span>
+            <h3>早晨拳擊班</h3>
+            <p>適合初學者，建立正確基礎。</p>
+            <ul class="class-meta">
+              <li><strong>Time</strong><span>Mon-Sat / 07:00-09:00</span></li>
+              <li><strong>For</strong><span>Morning routine, beginner friendly</span></li>
+            </ul>
+          </article>
+
+          <article class="class-card reveal">
+            <span class="class-num">№ 02</span>
+            <span class="label">Fundamentals</span>
+            <h3>拳擊基礎課</h3>
+            <p>你打中先諗速度。</p>
+            <ul class="class-meta">
+              <li><strong>Focus</strong><span>基本步法 / 出拳 / 距離 / 節奏</span></li>
+              <li><strong>Level</strong><span>All levels welcome</span></li>
+            </ul>
+          </article>
+
+          <article class="class-card reveal">
+            <span class="class-num">№ 03</span>
+            <span class="label">Private</span>
+            <h3>私人訓練</h3>
+            <p>1-on-1 with coach, flexible schedule.</p>
+            <ul class="class-meta">
+              <li><strong>Schedule</strong><span>按雙方時間彈性預約</span></li>
+              <li><strong>For</strong><span>想快速改善技術或定制訓練內容</span></li>
+            </ul>
+          </article>
+
+          <article class="class-card reveal">
+            <span class="class-num">№ 04</span>
+            <span class="label">Sparring</span>
+            <h3>對打課</h3>
+            <p>For intermediate and above students.</p>
+            <ul class="class-meta">
+              <li><strong>Requires</strong><span>需有一定基本功與控制能力</span></li>
+              <li><strong>Focus</strong><span>實戰節奏 / 判斷 / 距離感</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= ABOUT ======= -->
+    <section class="content-section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">02 · About</span>
+          <h2>關於我們<span class="bilingual-title">About Yamasaki Boxing HK</span></h2>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card reveal">
+            <h3>由基礎開始，建立真正拳擊根基</h3>
+            <p>
+              Yamasaki Boxing HK 致力於推廣正確拳擊技術。我們相信：你打中先諗速度。由基礎開始，建立真正的拳擊根基。
+            </p>
+            <div class="about-quote">
+              <em>Philosophy</em>
+              Authentic, community-focused, educational. 本地香港拳館，不走花巧包裝，專注教學與真實訓練。
+            </div>
+            <a class="ig-link" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">
+              @yamasaki_boxing_hk
+            </a>
+          </article>
+
+          <article class="ig-card reveal">
+            <span class="mini-badge">Instagram Feed</span>
+            <h3>追蹤拳館最新內容</h3>
+            <p>
+              想睇教學影片、早晨班日常同真實 gym 生活，可以直接到 Instagram 追蹤最新更新。
+            </p>
+            <div class="embed-shell" role="img" aria-label="Instagram 預留區">
+              <div>
+                <strong>@yamasaki_boxing_hk</strong>
+                <span>點擊前往 Instagram 查看真實內容、教學系列與拳館日常。</span>
+                <div style="margin-top: 1.2rem;">
+                  <a class="cta-link cta-primary" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">查看 Instagram</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= GYM LIFE ======= -->
+    <section class="content-section" id="gym-life">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">03 · Gym Life</span>
+          <h2>拳館日常<span class="bilingual-title">What You See On Our Instagram</span></h2>
+          <p>
+            從教學、晨操到真實訓練生活，Yamasaki Boxing HK 的內容不是擺拍，而是拳館真正發生的事。
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card reveal">
+            <span class="pillar-num">01</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>拳擊補習社</h3>
+            <p>教學影片系列，拆解正確技術觀念，讓你知道點樣先算真正打得準、打得快。</p>
+          </article>
+
+          <article class="pillar-card reveal">
+            <span class="pillar-num">02</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>早晨拳擊班</h3>
+            <p>朝早開始一日，用專注訓練開機，建立穩定生活節奏與身體狀態。</p>
+          </article>
+
+          <article class="pillar-card reveal">
+            <span class="pillar-num">03</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>拳館日常</h3>
+            <p>真實 gym 生活，看到學員進步、教練互動、課堂氣氛與本地拳館文化。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= CONTACT ======= -->
+    <section class="content-section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">04 · Contact</span>
+          <h2>聯絡我們<span class="bilingual-title">Visit or Message Us</span></h2>
+          <p>
+            如想查詢課堂、私人訓練或初學安排，可透過 Instagram 或 WhatsApp 聯絡。地點以香港為主，下方保留 Google Maps placeholder。
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card reveal">
+            <h3>聯絡方式 / Contact</h3>
+            <ul class="contact-list">
+              <li><strong>Instagram</strong><a href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">@yamasaki_boxing_hk</a></li>
+              <li><strong>WhatsApp</strong><a href="https://wa.me/85291234567" target="_blank" rel="noreferrer">+852 9123 4567</a></li>
+              <li><strong>Location</strong><span>Hong Kong</span></li>
+            </ul>
+            <div class="contact-actions">
+              <a class="cta-link cta-primary" href="https://wa.me/85291234567" target="_blank" rel="noreferrer">WhatsApp 查詢</a>
+              <a class="cta-link cta-secondary" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">Instagram ↗</a>
+            </div>
+          </article>
+
+          <article class="embed-card reveal">
+            <h3>Google Maps</h3>
+            <p>待確認具體地址後，可把這裡替換成實際 Google Maps iframe。</p>
+            <div class="embed-shell" role="img" aria-label="Google Maps 預留區">
+              <div>
+                <strong>HK Location Placeholder</strong>
+                <span>// replace with google maps embed for the gym address in Hong Kong.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= BOOKING ======= -->
+    <section class="content-section" id="booking">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">05 · Booking</span>
+          <h2>立即預約<span class="bilingual-title">Book a Class or Enquiry Slot</span></h2>
+          <p>
+            保留現有 Cal.com booking placeholder。你可稍後把正式的 Cal.com inline embed 直接貼到這個區塊。
+          </p>
+        </div>
+
+        <div class="booking-cards-grid">
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">60 min</span>
+            <h3>早晨拳擊班<br>Morning Boxing</h3>
+            <p>適合晨早開操與建立穩定節奏的學員，從基本動作與身體狀態開始。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約</a>
+          </article>
+
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">60 min</span>
+            <h3>拳擊基礎課<br>Fundamentals</h3>
+            <p>由步法、出拳、節奏到距離控制，適合想打好根基的學員。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約</a>
+          </article>
+
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">45 min</span>
+            <h3>私人訓練<br>Private</h3>
+            <p>一對一訓練安排，按你的技術程度、目標與時間作個人化調整。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約</a>
+          </article>
+
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">60 min</span>
+            <h3>對打課<br>Sparring</h3>
+            <p>為有一定基礎的學員而設，重視節奏、判斷、距離與實戰控制。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約</a>
+          </article>
+        </div>
+
+        <div class="booking-grid">
+          <article class="panel reveal">
+            <h3 style="margin-top: 0;">首次來館小提示<span class="bilingual-title">First-Time Tips</span></h3>
+            <ul class="notes-list">
+              <li>初學者亦可參加，建議先由基礎課或早晨班開始。</li>
+              <li>如想更針對個人目標，可考慮私人訓練。</li>
+              <li>預約前可先透過 Instagram / WhatsApp 查詢。</li>
+            </ul>
+          </article>
+
+          <article class="embed-card reveal">
+            <h3>線上預約 / Cal Booking</h3>
+            <p>對打課 Sparring 的即時預約表，已直接嵌入頁面並包在深色容器中，方便手機用戶操作。</p>
+            <div class="cal-embed-wrap" aria-label="Cal.com inline booking embed">
+              <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-對打課-sparring" class="cal-inline-container"><cal-inline data-layout="month_view" style="max-height:inherit;height:inherit;min-height:inherit;display:flex;position:relative;flex-wrap:wrap;width:100%" class="cal-element-embed-dark" loading="done">
+    <iframe class="cal-embed" name="cal-embed=對打課-sparring" title="Book a call" allow="payment" data-effective-cal-link="julian-alvarez-rttvmb/%E5%B0%8D%E6%89%93%E8%AA%B2-sparring" src="https://app.cal.com/julian-alvarez-rttvmb/%E5%B0%8D%E6%89%93%E8%AA%B2-sparring/embed?layout=month_view&amp;useSlotsViewOnSmallScreen=true&amp;embedType=inline&amp;ui.color-scheme=dark&amp;embed=%E5%B0%8D%E6%89%93%E8%AA%B2-sparring" style="height: 829px; width: 100%;"></iframe></cal-inline>
+    <style>.cal-inline-container::-webkit-scrollbar{display:none}.cal-inline-container{scrollbar-width:none}</style></div>
+              <script type="text/javascript">
+                (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+                Cal("init", "對打課-sparring", {origin:"https://app.cal.com"});
+
+                Cal.ns["對打課-sparring"]("inline", {
+                  elementOrSelector:"#my-cal-inline-對打課-sparring",
+                  config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+                  calLink: "julian-alvarez-rttvmb/對打課-sparring",
+                });
+
+                Cal.ns["對打課-sparring"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+              </script>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">Yamasaki Boxing HK</div>
+        <div class="footer-motto">你打中先諗速度 · Land the punch first</div>
+      </div>
+      <div>
+        <div>© 2025 · Hong Kong</div>
+        <div>Instagram: <a href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">@yamasaki_boxing_hk</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const siteNav = document.querySelector(".site-nav");
+    const navLinks = document.querySelectorAll(".nav-list a");
+    const revealItems = document.querySelectorAll(".reveal");
+    const sections = document.querySelectorAll("main section[id]");
+
+    if (navToggle && siteNav) {
+      navToggle.addEventListener("click", () => {
+        const expanded = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", String(!expanded));
+        siteNav.classList.toggle("open");
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navToggle.setAttribute("aria-expanded", "false");
+          siteNav.classList.remove("open");
+        });
+      });
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealItems.forEach((item) => {
+      if (!item.classList.contains("visible")) {
+        revealObserver.observe(item);
+      }
+    });
+
+    const setActiveLink = () => {
+      let currentId = "";
+      sections.forEach((section) => {
+        const top = window.scrollY;
+        const offset = section.offsetTop - 140;
+        const height = section.offsetHeight;
+        if (top >= offset && top < offset + height) {
+          currentId = section.id;
+        }
+      });
+      navLinks.forEach((link) => {
+        const active = link.getAttribute("href") === "#" + currentId;
+        link.classList.toggle("active", active);
+      });
+    };
+
+    window.addEventListener("scroll", setActiveLink, { passive: true });
+    window.addEventListener("load", setActiveLink);
+  </script>
+
+
+</body></html>

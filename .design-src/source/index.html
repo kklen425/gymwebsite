@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yamasaki Boxing HK</title>
+  <style>
+    :root {
+      --bg: #090909;
+      --bg-elevated: #121212;
+      --panel: rgba(255, 255, 255, 0.05);
+      --text: #f5f1e8;
+      --muted: #b5ada1;
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #dc2626;
+      --accent-strong: #ef4444;
+      --accent-soft: rgba(220, 38, 38, 0.16);
+      --gold: #d1a054;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --content-width: 1180px;
+      --nav-height: 78px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(220, 38, 38, 0.22), transparent 26%),
+        radial-gradient(circle at top left, rgba(209, 160, 84, 0.08), transparent 20%),
+        linear-gradient(180deg, #121212 0%, #090909 44%, #050505 100%);
+      min-height: 100vh;
+      line-height: 1.65;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 88%);
+      opacity: 0.45;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--content-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(9, 9, 9, 0.86);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .header-shell {
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(127, 29, 29, 0.9));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .brand-text small {
+      display: block;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-toggle {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 46px;
+      height: 46px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: currentColor;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .site-nav {
+      position: absolute;
+      inset: calc(100% + 1px) 1rem auto;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      background: rgba(17, 17, 17, 0.97);
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .site-nav.open {
+      display: block;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .nav-list a {
+      display: block;
+      padding: 0.8rem 0.9rem;
+      border-radius: 12px;
+      color: var(--muted);
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .nav-list a:hover,
+    .nav-list a.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 54px;
+      padding: 0 1.35rem;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .cta-primary {
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #fff;
+      box-shadow: 0 18px 32px rgba(220, 38, 38, 0.3);
+    }
+
+    .cta-secondary {
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    section {
+      scroll-margin-top: calc(var(--nav-height) + 18px);
+    }
+
+    .hero {
+      position: relative;
+      padding: 3rem 0 2rem;
+    }
+
+    .hero-grid,
+    .classes-grid,
+    .about-grid,
+    .pillars-grid,
+    .contact-grid,
+    .booking-grid,
+    .footer-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .hero-copy h1 {
+      margin: 1rem 0 0.75rem;
+      font-size: clamp(2.8rem, 10vw, 5.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 38rem;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .hero-subtitle {
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.7rem;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.8rem;
+    }
+
+    .panel,
+    .hero-card,
+    .class-card,
+    .about-card,
+    .pillar-card,
+    .contact-card,
+    .embed-card,
+    .ig-card {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card,
+    .class-card,
+    .about-card,
+    .pillar-card,
+    .contact-card,
+    .embed-card,
+    .ig-card,
+    .panel {
+      padding: 1.3rem;
+    }
+
+    .hero-card strong {
+      display: block;
+      font-size: 1.45rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .hero-card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      padding: 1.2rem;
+    }
+
+    .hero-frame {
+      min-height: 440px;
+      padding: 1.4rem;
+      border-radius: 30px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        radial-gradient(circle at top, rgba(220, 38, 38, 0.22), transparent 44%),
+        #0e0e0e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-frame::before {
+      content: "";
+      position: absolute;
+      inset: 12% -20% auto;
+      height: 58%;
+      background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.16), transparent);
+      transform: rotate(-8deg);
+    }
+
+    .frame-tag {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .hero-figure {
+      position: absolute;
+      inset: auto 1.4rem 1.4rem 1.4rem;
+      height: 74%;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(220, 38, 38, 0.92), rgba(220, 38, 38, 0.08) 25%, transparent 30%),
+        radial-gradient(circle at 50% 58%, rgba(255, 255, 255, 0.1), transparent 54%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02)),
+        #171717;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .hero-figure::before,
+    .hero-figure::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-figure::before {
+      top: 19%;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 18px rgba(0, 0, 0, 0.16);
+    }
+
+    .hero-figure::after {
+      top: 38%;
+      width: 220px;
+      height: 270px;
+      clip-path: polygon(40% 0, 60% 0, 78% 16%, 100% 100%, 0 100%, 22% 16%);
+      border-radius: 28px 28px 14px 14px;
+      box-shadow:
+        70px 16px 0 -20px rgba(220, 38, 38, 0.65),
+        -70px 16px 0 -20px rgba(220, 38, 38, 0.65);
+    }
+
+    .frame-note {
+      position: absolute;
+      left: 1.4rem;
+      bottom: 1.4rem;
+      z-index: 1;
+      max-width: 240px;
+      padding: 0.9rem 1rem;
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.56);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .frame-note strong {
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .frame-note span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .content-section {
+      padding: 1.4rem 0 0.8rem;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 0.85rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.85rem, 6vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 42rem;
+    }
+
+    .bilingual-title {
+      display: block;
+      color: var(--gold);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    .class-card .label,
+    .mini-badge {
+      display: inline-flex;
+      padding: 0.38rem 0.75rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #ffb4b4;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .class-card h3,
+    .about-card h3,
+    .pillar-card h3,
+    .contact-card h3,
+    .embed-card h3,
+    .ig-card h3 {
+      margin: 0.95rem 0 0.55rem;
+      font-size: 1.25rem;
+    }
+
+    .class-card p,
+    .about-card p,
+    .pillar-card p,
+    .contact-card p,
+    .embed-card p,
+    .ig-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .class-meta,
+    .contact-list,
+    .notes-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .class-meta li,
+    .contact-list li,
+    .notes-list li {
+      padding: 0.78rem 0.9rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .class-meta strong,
+    .contact-list strong {
+      display: block;
+      color: var(--text);
+    }
+
+    .about-quote {
+      margin-top: 1rem;
+      padding: 1rem 1.05rem;
+      border-left: 3px solid var(--accent);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .ig-link {
+      margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .pillar-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -14% -24% auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.18), transparent 70%);
+    }
+
+    .pillar-card .emoji {
+      font-size: 1.5rem;
+      display: inline-flex;
+      margin-bottom: 0.65rem;
+    }
+
+    .embed-shell {
+      margin-top: 1rem;
+      min-height: 280px;
+      border-radius: 22px;
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+        #0e0e0e;
+      display: grid;
+      place-items: center;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .embed-shell strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .embed-shell span {
+      display: block;
+      color: var(--muted);
+      max-width: 22rem;
+      margin: 0 auto;
+    }
+
+    #booking .booking-grid {
+      display: none;
+    }
+
+    .booking-cards-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .booking-class-card {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.3rem;
+      display: grid;
+      gap: 0.9rem;
+      align-content: start;
+    }
+
+    .booking-class-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.35;
+    }
+
+    .booking-class-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .booking-class-meta {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 0.38rem 0.75rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #ffb4b4;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cal-embed-wrap {
+      margin-top: 1rem;
+      min-height: 680px;
+      height: 78vh;
+      max-height: 900px;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+        #0c0c0c;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    #my-cal-inline-對打課-sparring {
+      width: 100% !important;
+      height: 100% !important;
+      overflow: auto !important;
+      border-radius: 22px;
+      color-scheme: dark;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+    }
+
+    .footer-grid {
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-brand {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (min-width: 720px) {
+      .hero {
+        padding: 4.2rem 0 2.5rem;
+      }
+
+      .hero-meta,
+      .classes-grid,
+      .pillars-grid,
+      .booking-grid,
+      .booking-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 980px) {
+      .nav-toggle {
+        display: none;
+      }
+
+      .site-nav {
+        position: static;
+        inset: auto;
+        display: block;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .nav-list {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .nav-list a {
+        padding: 0.7rem 0.9rem;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+        align-items: center;
+      }
+
+      .content-section {
+        padding-top: 2.4rem;
+      }
+
+      .classes-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .about-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+      }
+
+      .pillars-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .contact-grid,
+      .booking-grid,
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .booking-cards-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 719px) {
+      .cal-embed-wrap {
+        min-height: 620px;
+        height: 72vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-shell">
+      <a class="brand" href="#top" aria-label="Yamasaki Boxing HK 首頁">
+        <span class="brand-mark">YB</span>
+        <span class="brand-text">
+          <small>Hong Kong Boxing Gym</small>
+          <strong>Yamasaki Boxing HK</strong>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="切換導覽選單">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="主要導覽">
+        <ul class="nav-list">
+          <li><a href="#classes">課程</a></li>
+          <li><a href="#about">關於我們</a></li>
+          <li><a href="#gym-life">拳館日常</a></li>
+          <li><a href="#contact">聯絡</a></li>
+          <li><a href="#booking">預約</a></li>
+          <li><a href="my-booking.html">查看我的預約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal visible">
+          <span class="eyebrow">Authentic Local Boxing Gym</span>
+          <h1>拳擊，不只是運動</h1>
+          <p class="hero-subtitle">香港專業拳擊訓練 | Professional Boxing Training HK</p>
+          <p>
+            Yamasaki Boxing HK 以真實、社群感和教育導向為核心，專注推廣正確拳擊技術，陪你由基礎開始，
+            一步一步建立真正屬於自己的拳擊根基。
+          </p>
+
+          <div class="hero-actions">
+            <a class="cta-link cta-primary" href="#booking">立即預約 / Book Now</a>
+            <a class="cta-link cta-secondary" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="hero-card">
+              <strong>社群感 Community</strong>
+              <span>本地香港拳館文化，真實訓練氣氛。</span>
+            </div>
+            <div class="hero-card">
+              <strong>教育導向 Education</strong>
+              <span>由基礎做起，重視正確拳擊技術。</span>
+            </div>
+            <div class="hero-card">
+              <strong>Mon-Sat</strong>
+              <span>早晨拳擊班，朝早開始一日。</span>
+            </div>
+            <div class="hero-card">
+              <strong>@yamasaki_boxing_hk</strong>
+              <span>拳館內容、教學系列與日常更新。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="hero-frame">
+            <span class="frame-tag">Yamasaki Boxing HK</span>
+            <div class="hero-figure" aria-hidden="true"></div>
+            <div class="frame-note">
+              <strong>你打中先諗速度</strong>
+              <span>從基礎開始，練出真正技術，而不只是流汗打卡。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="classes">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Classes</span>
+          <h2>課程安排<span class="bilingual-title">Training Programs</span></h2>
+          <p>
+            針對不同程度與目標，安排由早晨班、基礎課到私人訓練與對打課，讓你按自己節奏進步。
+          </p>
+        </div>
+
+        <div class="classes-grid">
+          <article class="class-card reveal">
+            <span class="label">Morning Boxing</span>
+            <h3>早晨拳擊班</h3>
+            <p>適合初學者，建立正確基礎。</p>
+            <ul class="class-meta">
+              <li><strong>時間 Time</strong>Mon-Sat 7am-9am</li>
+              <li><strong>適合對象</strong>Morning routine, beginner friendly</li>
+            </ul>
+          </article>
+
+          <article class="class-card reveal">
+            <span class="label">Boxing Fundamentals</span>
+            <h3>拳擊基礎課</h3>
+            <p>你打中先諗速度。</p>
+            <ul class="class-meta">
+              <li><strong>重點 Focus</strong>基本步法、出拳、距離與節奏</li>
+              <li><strong>程度 Level</strong>All levels welcome</li>
+            </ul>
+          </article>
+
+          <article class="class-card reveal">
+            <span class="label">Private Training</span>
+            <h3>私人訓練</h3>
+            <p>1-on-1 with coach, flexible schedule.</p>
+            <ul class="class-meta">
+              <li><strong>安排 Schedule</strong>可按雙方時間彈性預約</li>
+              <li><strong>適合對象</strong>想快速改善技術或定制訓練內容</li>
+            </ul>
+          </article>
+
+          <article class="class-card reveal">
+            <span class="label">Sparring</span>
+            <h3>對打課</h3>
+            <p>For intermediate and above students.</p>
+            <ul class="class-meta">
+              <li><strong>要求 Requirement</strong>需有一定基本功與控制能力</li>
+              <li><strong>重點 Focus</strong>實戰節奏、判斷與距離感</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">About Us</span>
+          <h2>關於我們<span class="bilingual-title">About Yamasaki Boxing HK</span></h2>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card reveal">
+            <h3>由基礎開始，建立真正拳擊根基</h3>
+            <p>
+              Yamasaki Boxing HK 致力於推廣正確拳擊技術。
+              我們相信：你打中先諗速度。
+              由基礎開始，建立真正的拳擊根基。
+            </p>
+            <div class="about-quote">
+              Authentic, community-focused, educational.
+              本地香港拳館，不走花巧包裝，專注教學與真實訓練。
+            </div>
+            <a class="ig-link" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">
+              @yamasaki_boxing_hk
+            </a>
+          </article>
+
+          <article class="ig-card reveal">
+            <span class="mini-badge">Instagram Feed</span>
+            <h3>追蹤拳館最新內容</h3>
+            <p>
+              想睇教學影片、早晨班日常同真實 gym 生活，可以直接到 Instagram 追蹤最新更新。
+            </p>
+            <div class="embed-shell" role="img" aria-label="Instagram 預留區">
+              <div>
+                <strong>@yamasaki_boxing_hk</strong>
+                <span>點擊前往 Instagram 查看真實內容、教學系列與拳館日常。</span>
+                <div style="margin-top: 1rem;">
+                  <a class="cta-link cta-primary" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">查看 Instagram</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="gym-life">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Gym Life</span>
+          <h2>拳館日常<span class="bilingual-title">What You See On Our Instagram</span></h2>
+          <p>
+            從教學、晨操到真實訓練生活，Yamasaki Boxing HK 的內容不是擺拍，而是拳館真正發生的事。
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card reveal">
+            <span class="emoji">🥊</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>拳擊補習社</h3>
+            <p>教學影片系列，拆解正確技術觀念，讓你知道點樣先算真正打得準、打得快。</p>
+          </article>
+
+          <article class="pillar-card reveal">
+            <span class="emoji">🌅</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>早晨拳擊班</h3>
+            <p>朝早開始一日，用專注訓練開機，建立穩定生活節奏與身體狀態。</p>
+          </article>
+
+          <article class="pillar-card reveal">
+            <span class="emoji">🤜</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>拳館日常</h3>
+            <p>真實 gym 生活，看到學員進步、教練互動、課堂氣氛與本地拳館文化。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Contact</span>
+          <h2>聯絡我們<span class="bilingual-title">Visit or Message Us</span></h2>
+          <p>
+            如想查詢課堂、私人訓練或初學安排，可透過 Instagram 或 WhatsApp 聯絡。地點以香港為主，下方保留 Google Maps placeholder。
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card reveal">
+            <h3>聯絡方式 Contact Info</h3>
+            <ul class="contact-list">
+              <li><strong>Instagram</strong><a href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">instagram.com/yamasaki_boxing_hk</a></li>
+              <li><strong>WhatsApp Enquiry</strong><a href="https://wa.me/85291234567" target="_blank" rel="noreferrer">+852 9123 4567</a></li>
+              <li><strong>Location</strong>Hong Kong</li>
+            </ul>
+            <div class="contact-actions">
+              <a class="cta-link cta-primary" href="https://wa.me/85291234567" target="_blank" rel="noreferrer">WhatsApp 查詢</a>
+              <a class="cta-link cta-secondary" href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">Instagram</a>
+            </div>
+          </article>
+
+          <article class="embed-card reveal">
+            <h3>Google Maps Placeholder</h3>
+            <p>待確認具體地址後，可把這裡替換成實際 Google Maps iframe。</p>
+            <div class="embed-shell" role="img" aria-label="Google Maps 預留區">
+              <div>
+                <strong>Hong Kong Location Placeholder</strong>
+                <span>Replace with Google Maps embed for the gym address in Hong Kong.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="booking">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Booking</span>
+          <h2>立即預約<span class="bilingual-title">Book a Class or Enquiry Slot</span></h2>
+          <p>
+            保留現有 Cal.com booking placeholder。你可稍後把正式的 Cal.com inline embed 直接貼到這個區塊。
+          </p>
+        </div>
+
+        <div class="booking-cards-grid">
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">60 min</span>
+            <h3>早晨拳擊班<br>Morning Boxing</h3>
+            <p>適合晨早開操與建立穩定節奏的學員，從基本動作與身體狀態開始。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約 Book Now</a>
+          </article>
+
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">60 min</span>
+            <h3>拳擊基礎課<br>Boxing Fundamentals</h3>
+            <p>由步法、出拳、節奏到距離控制，適合想打好根基的學員。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約 Book Now</a>
+          </article>
+
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">45 min</span>
+            <h3>私人訓練<br>Private Training</h3>
+            <p>一對一訓練安排，按你的技術程度、目標與時間作個人化調整。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約 Book Now</a>
+          </article>
+
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">60 min</span>
+            <h3>對打課<br>Sparring</h3>
+            <p>為有一定基礎的學員而設，重視節奏、判斷、距離與實戰控制。</p>
+            <a class="cta-link cta-primary" href="booking.html">立即預約 Book Now</a>
+          </article>
+        </div>
+
+        <div class="booking-grid">
+          <article class="panel reveal">
+            <h3 style="margin-top: 0;">首次來館小提示</h3>
+            <ul class="notes-list">
+              <li>初學者亦可參加，建議先由基礎課或早晨班開始。</li>
+              <li>如想更針對個人目標，可考慮私人訓練。</li>
+              <li>預約前可先透過 Instagram / WhatsApp 查詢。</li>
+            </ul>
+          </article>
+
+          <article class="embed-card reveal">
+            <h3>線上預約 / Cal Booking</h3>
+            <p>對打課 Sparring 的即時預約表，已直接嵌入頁面並包在深色容器中，方便手機用戶操作。</p>
+            <div class="cal-embed-wrap" aria-label="Cal.com inline booking embed">
+              <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-對打課-sparring"></div>
+              <script type="text/javascript">
+                (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+                Cal("init", "對打課-sparring", {origin:"https://app.cal.com"});
+
+                Cal.ns["對打課-sparring"]("inline", {
+                  elementOrSelector:"#my-cal-inline-對打課-sparring",
+                  config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+                  calLink: "julian-alvarez-rttvmb/對打課-sparring",
+                });
+
+                Cal.ns["對打課-sparring"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+              </script>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">© 2025 Yamasaki Boxing HK</div>
+        <div>你打中先諗速度</div>
+      </div>
+      <div>
+        <div>Instagram: <a href="https://www.instagram.com/yamasaki_boxing_hk/" target="_blank" rel="noreferrer">@yamasaki_boxing_hk</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const siteNav = document.querySelector(".site-nav");
+    const navLinks = document.querySelectorAll(".nav-list a");
+    const revealItems = document.querySelectorAll(".reveal");
+    const sections = document.querySelectorAll("main section[id]");
+
+    if (navToggle && siteNav) {
+      navToggle.addEventListener("click", () => {
+        const expanded = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", String(!expanded));
+        siteNav.classList.toggle("open");
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navToggle.setAttribute("aria-expanded", "false");
+          siteNav.classList.remove("open");
+        });
+      });
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    revealItems.forEach((item) => {
+      if (!item.classList.contains("visible")) {
+        revealObserver.observe(item);
+      }
+    });
+
+    const setActiveLink = () => {
+      let currentId = "";
+
+      sections.forEach((section) => {
+        const top = window.scrollY;
+        const offset = section.offsetTop - 120;
+        const height = section.offsetHeight;
+        if (top >= offset && top < offset + height) {
+          currentId = section.id;
+        }
+      });
+
+      navLinks.forEach((link) => {
+        const active = link.getAttribute("href") === "#" + currentId;
+        link.classList.toggle("active", active);
+      });
+    };
+
+    window.addEventListener("scroll", setActiveLink, { passive: true });
+    window.addEventListener("load", setActiveLink);
+  </script>
+</body>
+</html>

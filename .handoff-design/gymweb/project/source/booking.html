@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yamasaki Boxing HK | Booking</title>
+  <style>
+    :root {
+      --bg: #090909;
+      --text: #f5f1e8;
+      --muted: #b5ada1;
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #dc2626;
+      --accent-strong: #ef4444;
+      --accent-soft: rgba(220, 38, 38, 0.16);
+      --gold: #d1a054;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --content-width: 1180px;
+      --nav-height: 78px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(220, 38, 38, 0.22), transparent 26%),
+        radial-gradient(circle at top left, rgba(209, 160, 84, 0.08), transparent 20%),
+        linear-gradient(180deg, #121212 0%, #090909 44%, #050505 100%);
+      min-height: 100vh;
+      line-height: 1.65;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 88%);
+      opacity: 0.45;
+    }
+
+    a,
+    button {
+      color: inherit;
+      text-decoration: none;
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--content-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(9, 9, 9, 0.86);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .header-shell {
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(127, 29, 29, 0.9));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .brand-text small {
+      display: block;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+    }
+
+    .header-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link,
+    .tab-button,
+    .fallback-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      min-height: 46px;
+      padding: 0 1.15rem;
+      font-weight: 700;
+      transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+    }
+
+    .nav-link.primary,
+    .tab-button.active,
+    .fallback-link {
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 18px 32px rgba(220, 38, 38, 0.3);
+    }
+
+    .nav-link:hover,
+    .tab-button:hover,
+    .fallback-link:hover {
+      transform: translateY(-2px);
+    }
+
+    main {
+      padding: 2.4rem 0 3rem;
+    }
+
+    .hero,
+    .tabs-panel,
+    .embed-panel {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+        rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero,
+    .tabs-panel,
+    .embed-panel {
+      padding: 1.25rem;
+    }
+
+    .hero {
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      margin: 1rem 0 0.65rem;
+      font-size: clamp(2rem, 7vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p,
+    .tabs-head p,
+    .embed-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+
+    .tabs-head,
+    .embed-head {
+      margin-bottom: 1rem;
+    }
+
+    .tabs-head h2,
+    .embed-head h2 {
+      margin: 0 0 0.35rem;
+      font-size: 1.35rem;
+    }
+
+    .tabs-grid {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .tab-button {
+      justify-content: flex-start;
+      min-height: 68px;
+      padding: 0.95rem 1rem;
+      text-align: left;
+      border-radius: 18px;
+      text-transform: none;
+      font-size: 0.98rem;
+    }
+
+    .tab-label {
+      display: block;
+      line-height: 1.35;
+    }
+
+    .tab-label small {
+      display: block;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.2rem;
+      font-size: 0.75rem;
+    }
+
+    .embed-wrap {
+      min-height: 720px;
+      height: 78vh;
+      max-height: 960px;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+        #0c0c0c;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    #cal-embed-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
+    }
+
+    .embed-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .embed-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer {
+      padding: 0 0 2.5rem;
+      color: var(--muted);
+    }
+
+    .footer-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (min-width: 720px) {
+      .tabs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 980px) {
+      .tabs-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .footer-shell {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 719px) {
+      .embed-wrap {
+        min-height: 620px;
+        height: 72vh;
+      }
+
+      .embed-actions {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-shell">
+      <a class="brand" href="index.html" aria-label="返回首頁">
+        <span class="brand-mark">YB</span>
+        <span class="brand-text">
+          <small>Hong Kong Boxing Gym</small>
+          <strong>Yamasaki Boxing HK</strong>
+        </span>
+      </a>
+
+      <div class="header-links">
+        <a class="nav-link" href="my-booking.html">查看我的預約</a>
+        <a class="nav-link primary" href="index.html">返回主站</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero">
+        <span class="eyebrow">Booking</span>
+        <h1>選擇課堂，立即預約</h1>
+        <p>點擊下方課堂分頁即可切換預約日曆。The calendar stays on the page so you can book directly without leaving the site.</p>
+      </section>
+
+      <section class="tabs-panel">
+        <div class="tabs-head">
+          <h2>課程選擇</h2>
+          <p>請先選擇你想預約的課堂。</p>
+        </div>
+        <div class="tabs-grid" id="class-tabs">
+          <button class="tab-button active" type="button" data-class="morning-boxing" data-link="https://cal.com/julian-alvarez-rttvmb/%E6%97%A9%E6%99%A8%E6%8B%B3%E6%93%8A%E7%8F%AD-morning-boxing">
+            <span class="tab-label">早晨拳擊班<small>Morning Boxing</small></span>
+          </button>
+          <button class="tab-button" type="button" data-class="boxing-fundamentals" data-link="https://cal.com/julian-alvarez-rttvmb/%E6%8B%B3%E6%93%8A%E5%9F%BA%E7%A4%8E%E8%AA%B2-boxing-fundamentals">
+            <span class="tab-label">拳擊基礎課<small>Boxing Fundamentals</small></span>
+          </button>
+          <button class="tab-button" type="button" data-class="private-training" data-link="https://cal.com/julian-alvarez-rttvmb/%E7%A7%81%E4%BA%BA%E8%A8%93%E7%B7%B4-private-training">
+            <span class="tab-label">私人訓練<small>Private Training</small></span>
+          </button>
+          <button class="tab-button" type="button" data-class="sparring" data-link="https://cal.com/julian-alvarez-rttvmb/%E5%B0%8D%E6%89%93%E8%AA%B2-sparring">
+            <span class="tab-label">對打課<small>Sparring</small></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="embed-panel" style="margin-top: 1rem;">
+        <div class="embed-head">
+          <h2 id="embed-title">早晨拳擊班 / Morning Boxing</h2>
+          <p id="embed-description">適合晨早開操與建立穩定訓練節奏的學員。請直接在下方日曆選擇日期和時間。</p>
+        </div>
+
+        <div class="embed-wrap">
+          <iframe
+            id="cal-embed-frame"
+            title="Cal booking calendar"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            src="https://cal.com/julian-alvarez-rttvmb/%E6%97%A9%E6%99%A8%E6%8B%B3%E6%93%8A%E7%8F%AD-morning-boxing">
+          </iframe>
+        </div>
+
+        <div class="embed-actions">
+          <div class="embed-note">如果下方日曆需要幾秒載入屬正常情況。If the calendar does not appear immediately, wait a moment or open it in a new tab.</div>
+          <a class="fallback-link" id="open-booking-link" href="https://cal.com/julian-alvarez-rttvmb/%E6%97%A9%E6%99%A8%E6%8B%B3%E6%93%8A%E7%8F%AD-morning-boxing" target="_blank" rel="noreferrer">在新分頁開啟預約</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-shell">
+      <div>© 2025 Yamasaki Boxing HK</div>
+      <div>Instagram: @yamasaki_boxing_hk</div>
+    </div>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab-button");
+    const embedTitle = document.getElementById("embed-title");
+    const embedDescription = document.getElementById("embed-description");
+    const embedFrame = document.getElementById("cal-embed-frame");
+    const openBookingLink = document.getElementById("open-booking-link");
+
+    const classMeta = {
+      "morning-boxing": {
+        title: "早晨拳擊班 / Morning Boxing",
+        description: "適合晨早開操與建立穩定訓練節奏的學員。請直接在下方日曆選擇日期和時間。"
+      },
+      "boxing-fundamentals": {
+        title: "拳擊基礎課 / Boxing Fundamentals",
+        description: "由步法、出拳與距離控制開始，打好真正基礎。"
+      },
+      "private-training": {
+        title: "私人訓練 / Private Training",
+        description: "一對一預約時段，按你的目標和程度安排個人化內容。"
+      },
+      "sparring": {
+        title: "對打課 / Sparring",
+        description: "適合具備基礎的學員，安排實戰節奏與距離訓練。"
+      }
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((button) => button.classList.remove("active"));
+        tab.classList.add("active");
+
+        const classKey = tab.getAttribute("data-class");
+        const bookingLink = tab.getAttribute("data-link");
+
+        embedTitle.textContent = classMeta[classKey].title;
+        embedDescription.textContent = classMeta[classKey].description;
+        embedFrame.src = bookingLink;
+        openBookingLink.href = bookingLink;
+      });
+    });
+  </script>
+</body>
+</html>
