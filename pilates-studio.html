@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harbour Reformer Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5efe6;
+      --surface:rgba(255,255,255,.62);
+      --surface-2:#fffaf4;
+      --line:rgba(79,56,44,.14);
+      --text:#2d241f;
+      --muted:#685a52;
+      --muted-2:#8f7f75;
+      --accent:#c57a4a;
+      --accent-deep:#8e5935;
+      --glow:#f1dcc8;
+      --shadow:0 26px 60px rgba(81,56,37,.12);
+      --max:1180px;
+      --radius:26px;
+      --body:"Noto Sans TC","Segoe UI",sans-serif;
+      --display:"Cormorant Garamond","Noto Sans TC",serif;
+      --mono:"JetBrains Mono",monospace;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font:16px/1.7 var(--body);
+      background:
+        radial-gradient(circle at top left, rgba(241,220,200,.9), transparent 28%),
+        linear-gradient(180deg, #f7f1e9 0%, #f3ede4 55%, #ece3d8 100%);
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(calc(100% - 2rem), var(--max));margin:0 auto}
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(245,239,230,.8);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    .header-shell{
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .brand small{
+      display:block;
+      color:var(--muted-2);
+      font:500 .72rem var(--mono);
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .brand strong{
+      display:block;
+      font:700 1.2rem var(--display);
+      letter-spacing:.02em;
+    }
+    .nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.55rem}
+    .nav a{
+      padding:.72rem 1rem;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.45);
+      color:var(--muted);
+      font:500 .78rem var(--mono);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .nav a.cta{
+      color:#fff;
+      background:linear-gradient(180deg, var(--accent), var(--accent-deep));
+      border-color:transparent;
+    }
+    .hero{padding:1.2rem 0 0}
+    .hero-shell,
+    .section-shell{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.52);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .hero-grid{display:grid}
+    .hero-copy{padding:1.4rem}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.38rem .75rem;
+      border-radius:999px;
+      background:rgba(197,122,74,.12);
+      color:var(--accent-deep);
+      font:500 .72rem var(--mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .eyebrow::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--accent);
+    }
+    h1{
+      margin:.9rem 0 1rem;
+      font:700 clamp(3rem, 13vw, 5.8rem)/.9 var(--display);
+      letter-spacing:-.03em;
+    }
+    .lead{margin:0;color:var(--muted);max-width:38rem}
+    .actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.4rem}
+    .button{
+      min-height:48px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 1.15rem;
+      border-radius:999px;
+      border:1px solid transparent;
+      font:600 .92rem var(--body);
+      transition:transform .2s ease;
+    }
+    .button:hover{transform:translateY(-2px)}
+    .button.primary{
+      color:#fff;
+      background:linear-gradient(180deg, var(--accent), var(--accent-deep));
+      box-shadow:0 16px 30px rgba(197,122,74,.2);
+    }
+    .button.secondary{
+      border-color:var(--line);
+      background:rgba(255,255,255,.6);
+    }
+    .hero-notes{
+      display:grid;
+      gap:.8rem;
+      margin-top:1.4rem;
+    }
+    .hero-note{
+      padding:1rem;
+      border-radius:20px;
+      background:rgba(255,255,255,.55);
+      border:1px solid var(--line);
+    }
+    .hero-note strong{
+      display:block;
+      font:700 1.05rem var(--display);
+    }
+    .hero-note span{display:block;color:var(--muted)}
+    .hero-visual{
+      min-height:360px;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.3), transparent 40%),
+        linear-gradient(135deg, rgba(241,220,200,.8), rgba(255,255,255,.35)),
+        #efe3d5;
+      display:grid;
+      place-items:center;
+      padding:2rem;
+      text-align:center;
+    }
+    .hero-visual strong{
+      font:700 clamp(2rem, 8vw, 3.7rem)/.96 var(--display);
+      max-width:14rem;
+    }
+    .hero-visual span{
+      display:block;
+      margin-top:.8rem;
+      color:var(--muted);
+      font:500 .8rem var(--mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .section{padding:1.1rem 0 0}
+    .section-shell{padding:1.3rem}
+    .section-head{
+      display:grid;
+      gap:.75rem;
+      padding-bottom:1rem;
+      margin-bottom:1rem;
+      border-bottom:1px solid var(--line);
+    }
+    .section-head h2{
+      margin:0;
+      font:700 clamp(2.2rem, 8vw, 4rem)/.94 var(--display);
+    }
+    .section-head p{margin:0;color:var(--muted);max-width:45rem}
+    .subhead{
+      display:block;
+      margin-top:.45rem;
+      color:var(--muted-2);
+      font:500 .78rem var(--mono);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .grid,
+    .offer-grid,
+    .version-grid{display:grid;gap:1rem}
+    .card{
+      padding:1.2rem;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(255,255,255,.5);
+    }
+    .card h3{
+      margin:.8rem 0 .45rem;
+      font:700 1.8rem/1 var(--display);
+    }
+    .card p{margin:0;color:var(--muted)}
+    .meta{
+      margin:1rem 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:.6rem;
+    }
+    .meta li{
+      padding-top:.6rem;
+      border-top:1px dashed var(--line);
+      display:grid;
+      gap:.15rem;
+    }
+    .meta strong{
+      color:var(--accent-deep);
+      font:500 .74rem var(--mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .footer{
+      padding:1.25rem 0 2.4rem;
+      color:var(--muted);
+    }
+    .footer-grid{
+      display:grid;
+      gap:1rem;
+      padding-top:1.25rem;
+      border-top:1px solid var(--line);
+    }
+    .footer strong{
+      display:block;
+      color:var(--text);
+      font:700 1.05rem var(--display);
+    }
+    @media (min-width:820px){
+      .hero-grid{grid-template-columns:1.05fr .95fr}
+      .grid,
+      .offer-grid,
+      .version-grid,
+      .footer-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    }
+    @media (min-width:1040px){
+      .offer-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}
+      .version-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-shell">
+      <a class="brand" href="#top">
+        <small>Version 02</small>
+        <strong>Harbour Reformer Studio</strong>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Boxing</a>
+        <a href="pilates-studio.html">Pilates</a>
+        <a href="barber-house.html">Barber</a>
+        <a class="cta" href="#contact">Book Intro</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-shell">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Pilates Studio Website</span>
+            <h1>身體回到更穩定、更輕盈的狀態</h1>
+            <p class="lead">
+              Harbour Reformer Studio 專注小班 reformer 與私教課，幫助客人改善姿勢、提升核心控制，
+              同時在忙碌生活中找回規律與節奏。這一版適合預約型工作室、女性客群與重視質感的本地品牌。
+            </p>
+            <div class="actions">
+              <a class="button primary" href="#programs">查看課程</a>
+              <a class="button secondary" href="#contact">立即查詢</a>
+            </div>
+            <div class="hero-notes">
+              <div class="hero-note">
+                <strong>小班課節奏清楚</strong>
+                <span>初學者容易上手，回頭客亦能穩定進步。</span>
+              </div>
+              <div class="hero-note">
+                <strong>工作室預約感強</strong>
+                <span>非常適合搭配 WhatsApp、表單或行事曆預約流程。</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div>
+              <strong>Aligned Body Calm Mind</strong>
+              <span>Hong Kong Reformer Pilates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="programs">
+      <div class="container section-shell">
+        <div class="section-head">
+          <span class="eyebrow">Programs</span>
+          <h2>課程安排<span class="subhead">適合私教工作室、精品課程與女性客群網站</span></h2>
+          <p>客人可以直接看清楚不同課程的形式、目標與適合程度，再決定最合適的安排。</p>
+        </div>
+        <div class="offer-grid">
+          <article class="card">
+            <h3>Intro Reformer</h3>
+            <p>適合第一次接觸 pilates 的客人，從呼吸、核心與器械控制開始。</p>
+            <ul class="meta">
+              <li><strong>Class Type</strong><span>Beginner Small Group</span></li>
+              <li><strong>Goal</strong><span>建立穩定動作基礎與課堂信心。</span></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Posture Reset</h3>
+            <p>針對久坐、肩頸緊張與下背不適，改善日常姿勢與發力模式。</p>
+            <ul class="meta">
+              <li><strong>Class Type</strong><span>Signature Group Class</span></li>
+              <li><strong>Goal</strong><span>改善身體排列與日常舒適度。</span></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Private Session</h3>
+            <p>一對一調整動作、安排訓練節奏，適合產後、復健後或特定目標客人。</p>
+            <ul class="meta">
+              <li><strong>Class Type</strong><span>1-on-1 Coaching</span></li>
+              <li><strong>Goal</strong><span>更精準、更有針對性的進度安排。</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container section-shell">
+        <div class="section-head">
+          <span class="eyebrow">Why It Works</span>
+          <h2>這個版本適合怎樣的生意<span class="subhead">清楚、安靜、重視服務細節與預約體驗</span></h2>
+          <p>如果你的客人重視空間感、信任感與預約前資訊，這種內容結構會比「只放幾張圖」更容易轉化。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>服務說清楚</h3>
+            <p>每項課程都有明確目標、程度與適合對象，第一次接觸的人都容易理解。</p>
+          </article>
+          <article class="card">
+            <h3>預約動線自然</h3>
+            <p>從品牌介紹、課程、到聯絡方式一氣呵成，特別適合 WhatsApp 或表單預約。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container section-shell">
+        <div class="section-head">
+          <span class="eyebrow">Contact</span>
+          <h2>聯絡與預約<span class="subhead">客人可以直接查詢時間、價目與試堂安排</span></h2>
+          <p>這類工作室網站最重要的是讓客人放心聯絡，所以內容會優先講清楚課程與預約方式。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>預約入口</h3>
+            <p>WhatsApp、Instagram 與試堂表單都可以放在同一區，讓客人最快完成第一步。</p>
+          </article>
+          <article class="card">
+            <h3>位置資訊</h3>
+            <p>可展示中環、上環或銅鑼灣等工作室地點，並附上地圖與到達方式。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Harbour Reformer Studio</strong>
+        <span>Version 02 / Pilates Studio</span>
+      </div>
+      <div>
+        <span>另外版本：<a href="index.html">Boxing</a> / <a href="barber-house.html">Barber</a></span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

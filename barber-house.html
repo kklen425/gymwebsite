@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central Fade House</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#12100f;
+      --surface:#1a1715;
+      --surface-2:#221d1a;
+      --line:rgba(255,255,255,.09);
+      --text:#f4efe8;
+      --muted:#b7afa6;
+      --muted-2:#84796d;
+      --gold:#c39a5a;
+      --gold-deep:#8c6a35;
+      --shadow:0 24px 60px rgba(0,0,0,.32);
+      --max:1180px;
+      --radius:24px;
+      --display:"Bebas Neue","Noto Sans TC",sans-serif;
+      --body:"Noto Sans TC","Segoe UI",sans-serif;
+      --mono:"JetBrains Mono",monospace;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font:16px/1.65 var(--body);
+      background:
+        radial-gradient(circle at top right, rgba(195,154,90,.13), transparent 24%),
+        linear-gradient(180deg, #191614 0%, #12100f 48%, #0d0c0b 100%);
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(calc(100% - 2rem), var(--max));margin:0 auto}
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(18,16,15,.82);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+    .header-shell{
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:.15rem;
+    }
+    .brand small{
+      color:var(--gold);
+      font:500 .72rem var(--mono);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    .brand strong{
+      font:400 1.9rem/1 var(--display);
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+    .nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.55rem}
+    .nav a{
+      padding:.72rem 1rem;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font:500 .78rem var(--mono);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .nav a.cta{
+      color:#1a1612;
+      background:linear-gradient(180deg, #d5b07a, var(--gold));
+      border-color:transparent;
+    }
+    .hero{padding:1.2rem 0 0}
+    .hero-shell,
+    .section-shell{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .hero-grid,
+    .grid,
+    .service-grid,
+    .version-grid{display:grid;gap:1rem}
+    .hero-copy{padding:1.35rem}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.38rem .75rem;
+      border-radius:999px;
+      border:1px solid rgba(195,154,90,.3);
+      background:rgba(195,154,90,.1);
+      color:#e4c896;
+      font:500 .72rem var(--mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .eyebrow::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:var(--gold);
+    }
+    h1{
+      margin:.85rem 0 1rem;
+      font:400 clamp(3.4rem, 15vw, 6.4rem)/.9 var(--display);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .lead{margin:0;max-width:40rem;color:var(--muted)}
+    .actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.4rem}
+    .button{
+      min-height:48px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 1.15rem;
+      border-radius:16px;
+      border:1px solid transparent;
+      font:600 .92rem var(--body);
+      transition:transform .2s ease;
+    }
+    .button:hover{transform:translateY(-2px)}
+    .button.primary{
+      color:#1a1612;
+      background:linear-gradient(180deg, #d5b07a, var(--gold));
+      box-shadow:0 16px 30px rgba(195,154,90,.18);
+    }
+    .button.secondary{
+      border-color:var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+    }
+    .hero-badges{
+      display:grid;
+      gap:.8rem;
+      margin-top:1.4rem;
+    }
+    .hero-badge{
+      padding:1rem;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .hero-badge strong{
+      display:block;
+      color:#f2dbb4;
+      font:400 1.4rem var(--display);
+      letter-spacing:.03em;
+      text-transform:uppercase;
+    }
+    .hero-badge span{display:block;color:var(--muted)}
+    .hero-visual{
+      min-height:360px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(195,154,90,.15), transparent 20%),
+        linear-gradient(135deg, rgba(255,255,255,.05), transparent 50%),
+        #141210;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:2rem;
+    }
+    .hero-visual strong{
+      font:400 clamp(2.6rem, 8vw, 4.4rem)/.9 var(--display);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .hero-visual span{
+      display:block;
+      margin-top:.8rem;
+      color:var(--muted);
+      font:500 .78rem var(--mono);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .section{padding:1.1rem 0 0}
+    .section-shell{padding:1.3rem}
+    .section-head{
+      display:grid;
+      gap:.75rem;
+      padding-bottom:1rem;
+      margin-bottom:1rem;
+      border-bottom:1px solid var(--line);
+    }
+    .section-head h2{
+      margin:0;
+      font:400 clamp(2.6rem, 9vw, 4.4rem)/.94 var(--display);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .section-head p{margin:0;color:var(--muted);max-width:46rem}
+    .subhead{
+      display:block;
+      margin-top:.45rem;
+      color:var(--muted-2);
+      font:500 .78rem var(--mono);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .card{
+      padding:1.2rem;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:rgba(255,255,255,.03);
+    }
+    .card h3{
+      margin:.75rem 0 .4rem;
+      font:400 1.8rem/1 var(--display);
+      letter-spacing:.03em;
+      text-transform:uppercase;
+    }
+    .card p{margin:0;color:var(--muted)}
+    .meta{
+      margin:1rem 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:.6rem;
+    }
+    .meta li{
+      padding-top:.6rem;
+      border-top:1px dashed var(--line);
+      display:grid;
+      gap:.15rem;
+    }
+    .meta strong{
+      color:#f2dbb4;
+      font:500 .74rem var(--mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .footer{
+      padding:1.25rem 0 2.4rem;
+      color:var(--muted);
+    }
+    .footer-grid{
+      display:grid;
+      gap:1rem;
+      padding-top:1.25rem;
+      border-top:1px solid var(--line);
+    }
+    .footer strong{
+      display:block;
+      color:var(--text);
+      font:400 1.7rem var(--display);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    @media (min-width:820px){
+      .hero-grid{grid-template-columns:1.05fr .95fr}
+      .grid,
+      .footer-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    }
+    @media (min-width:1040px){
+      .service-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}
+      .version-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-shell">
+      <a class="brand" href="#top">
+        <small>Version 03</small>
+        <strong>Central Fade House</strong>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Boxing</a>
+        <a href="pilates-studio.html">Pilates</a>
+        <a href="barber-house.html">Barber</a>
+        <a class="cta" href="#contact">Book Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-shell">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Barber Shop Website</span>
+            <h1>Cut Clean Look Sharp</h1>
+            <p class="lead">
+              Central Fade House 以俐落修剪、穩定服務流程與到店體驗為核心。
+              這個版本適合男士理髮店、barber house、grooming brand 或任何重視形象與回頭客的本地生意。
+            </p>
+            <div class="actions">
+              <a class="button primary" href="#services">查看服務</a>
+              <a class="button secondary" href="#contact">WhatsApp 預約</a>
+            </div>
+            <div class="hero-badges">
+              <div class="hero-badge">
+                <strong>Walk-in + Booking</strong>
+                <span>適合同時接 walk-in 與預約客，網站可清楚講好流程與服務內容。</span>
+              </div>
+              <div class="hero-badge">
+                <strong>Service-first Layout</strong>
+                <span>把髮型、價目、時段與位置放到最容易轉化的位置。</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div>
+              <strong>Precision Cuts Daily Rituals</strong>
+              <span>Hong Kong Barber House</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container section-shell">
+        <div class="section-head">
+          <span class="eyebrow">Services</span>
+          <h2>服務內容<span class="subhead">適合理髮店、barber house 與男士 grooming brand</span></h2>
+          <p>客人最關心的是做什麼、多少時間、幾多錢，所以這類網站要把服務講得夠直接。</p>
+        </div>
+        <div class="service-grid">
+          <article class="card">
+            <h3>Signature Fade</h3>
+            <p>俐落漸層與輪廓修整，適合想保持乾淨形象的上班族與固定回店客人。</p>
+            <ul class="meta">
+              <li><strong>Duration</strong><span>45 mins</span></li>
+              <li><strong>Includes</strong><span>Cut, styling, neckline finish</span></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Cut + Beard</h3>
+            <p>髮型與鬍型一併整理，整體更完整，亦適合拍攝或重要場合前預約。</p>
+            <ul class="meta">
+              <li><strong>Duration</strong><span>60 mins</span></li>
+              <li><strong>Includes</strong><span>Haircut, beard trim, hot towel finish</span></li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Weekly Clean-up</h3>
+            <p>快速修邊與整理，讓回頭客可以更頻密維持整潔外觀。</p>
+            <ul class="meta">
+              <li><strong>Duration</strong><span>20 mins</span></li>
+              <li><strong>Includes</strong><span>Line-up, neck clean, quick styling</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container section-shell">
+        <div class="section-head">
+          <span class="eyebrow">Content Structure</span>
+          <h2>這個版本的賣點<span class="subhead">成熟、直接、強調到店體驗與服務細節</span></h2>
+          <p>如果你要賣網站給本地商戶，barber 版本很適合展示「不是淨係靚，而係真係幫到客人預約」。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>價目與服務夠清楚</h3>
+            <p>不用客人來回 DM 才知道有什麼服務，網站已經先處理常見問題。</p>
+          </article>
+          <article class="card">
+            <h3>到店路線與預約方便</h3>
+            <p>可直接放地圖、營業時間、WhatsApp 按鈕與理髮師時段，轉化會更高。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container section-shell">
+        <div class="section-head">
+          <span class="eyebrow">Contact</span>
+          <h2>預約與到店資訊<span class="subhead">男士理髮店最重要是夠直接、夠快、夠容易聯絡</span></h2>
+          <p>客人可以立即看見 WhatsApp 預約、營業時間與店舖位置，不需要兜圈問一輪先知點預約。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>預約方式</h3>
+            <p>WhatsApp、Instagram、Google Maps 與價目表都可以集中在同一區，手機瀏覽亦非常清晰。</p>
+          </article>
+          <article class="card">
+            <h3>店舖資訊</h3>
+            <p>中環、尖沙咀、旺角等地段可直接展示，方便 walk-in 客與預約客快速找到位置。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Central Fade House</strong>
+        <span>Version 03 / Barber Shop</span>
+      </div>
+      <div>
+        <span>另外版本：<a href="index.html">Boxing</a> / <a href="pilates-studio.html">Pilates</a></span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
