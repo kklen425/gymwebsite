@@ -3,261 +3,411 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Harbour Reformer Studio</title>
+  <title>Harbour Pilates Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#f5efe6;
-      --surface:rgba(255,255,255,.62);
-      --surface-2:#fffaf4;
-      --line:rgba(79,56,44,.14);
-      --text:#2d241f;
-      --muted:#685a52;
-      --muted-2:#8f7f75;
-      --accent:#c57a4a;
-      --accent-deep:#8e5935;
-      --glow:#f1dcc8;
-      --shadow:0 26px 60px rgba(81,56,37,.12);
-      --max:1180px;
-      --radius:26px;
-      --body:"Noto Sans TC","Segoe UI",sans-serif;
-      --display:"Cormorant Garamond","Noto Sans TC",serif;
-      --mono:"JetBrains Mono",monospace;
+    :root {
+      --bg: #090909;
+      --panel: rgba(255, 255, 255, 0.05);
+      --text: #f5f1e8;
+      --muted: #b9afa1;
+      --line: rgba(255, 255, 255, 0.11);
+      --accent: #c08457;
+      --accent-strong: #d4a373;
+      --accent-soft: rgba(192, 132, 87, 0.16);
+      --gold: #ead1b1;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --content-width: 1180px;
+      --nav-height: 78px;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      font:16px/1.7 var(--body);
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
+      color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(241,220,200,.9), transparent 28%),
-        linear-gradient(180deg, #f7f1e9 0%, #f3ede4 55%, #ece3d8 100%);
+        radial-gradient(circle at top right, rgba(192, 132, 87, 0.2), transparent 26%),
+        radial-gradient(circle at top left, rgba(234, 209, 177, 0.08), transparent 20%),
+        linear-gradient(180deg, #131110 0%, #090909 44%, #050505 100%);
+      min-height: 100vh;
+      line-height: 1.65;
     }
-    a{text-decoration:none;color:inherit}
-    .container{width:min(calc(100% - 2rem), var(--max));margin:0 auto}
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      background:rgba(245,239,230,.8);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line);
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 88%);
+      opacity: 0.42;
     }
-    .header-shell{
-      min-height:76px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:1rem;
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 2rem), var(--content-width)); margin: 0 auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(9, 9, 9, 0.86);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .brand small{
-      display:block;
-      color:var(--muted-2);
-      font:500 .72rem var(--mono);
-      letter-spacing:.16em;
-      text-transform:uppercase;
+    .header-shell {
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
-    .brand strong{
-      display:block;
-      font:700 1.2rem var(--display);
-      letter-spacing:.02em;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
-    .nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.55rem}
-    .nav a{
-      padding:.72rem 1rem;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.45);
-      color:var(--muted);
-      font:500 .78rem var(--mono);
-      letter-spacing:.08em;
-      text-transform:uppercase;
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(212, 163, 115, 0.95), rgba(120, 79, 45, 0.9));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      font-size: 0.92rem;
+      font-weight: 800;
     }
-    .nav a.cta{
-      color:#fff;
-      background:linear-gradient(180deg, var(--accent), var(--accent-deep));
-      border-color:transparent;
+    .brand-text small {
+      display: block;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
-    .hero{padding:1.2rem 0 0}
-    .hero-shell,
-    .section-shell{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:rgba(255,255,255,.52);
-      box-shadow:var(--shadow);
-      overflow:hidden;
+    .brand-text strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
     }
-    .hero-grid{display:grid}
-    .hero-copy{padding:1.4rem}
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
-      padding:.38rem .75rem;
-      border-radius:999px;
-      background:rgba(197,122,74,.12);
-      color:var(--accent-deep);
-      font:500 .72rem var(--mono);
-      letter-spacing:.12em;
-      text-transform:uppercase;
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.6rem;
     }
-    .eyebrow::before{
-      content:"";
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--accent);
+    .nav-links a {
+      padding: 0.72rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.84rem;
     }
-    h1{
-      margin:.9rem 0 1rem;
-      font:700 clamp(3rem, 13vw, 5.8rem)/.9 var(--display);
-      letter-spacing:-.03em;
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
     }
-    .lead{margin:0;color:var(--muted);max-width:38rem}
-    .actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.4rem}
-    .button{
-      min-height:48px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:0 1.15rem;
-      border-radius:999px;
-      border:1px solid transparent;
-      font:600 .92rem var(--body);
-      transition:transform .2s ease;
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 54px;
+      padding: 0 1.35rem;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
     }
-    .button:hover{transform:translateY(-2px)}
-    .button.primary{
-      color:#fff;
-      background:linear-gradient(180deg, var(--accent), var(--accent-deep));
-      box-shadow:0 16px 30px rgba(197,122,74,.2);
+    .cta-link:hover { transform: translateY(-2px); }
+    .cta-primary {
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #fff;
+      box-shadow: 0 18px 32px rgba(192, 132, 87, 0.28);
     }
-    .button.secondary{
-      border-color:var(--line);
-      background:rgba(255,255,255,.6);
+    .cta-secondary {
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
     }
-    .hero-notes{
-      display:grid;
-      gap:.8rem;
-      margin-top:1.4rem;
+    section { scroll-margin-top: calc(var(--nav-height) + 18px); }
+    .hero { padding: 3rem 0 2rem; }
+    .hero-grid, .classes-grid, .about-grid, .pillars-grid, .contact-grid, .booking-grid, .footer-grid {
+      display: grid;
+      gap: 1rem;
     }
-    .hero-note{
-      padding:1rem;
-      border-radius:20px;
-      background:rgba(255,255,255,.55);
-      border:1px solid var(--line);
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
     }
-    .hero-note strong{
-      display:block;
-      font:700 1.05rem var(--display);
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-strong);
     }
-    .hero-note span{display:block;color:var(--muted)}
-    .hero-visual{
-      min-height:360px;
+    .hero-copy,
+    .hero-frame,
+    .class-card,
+    .panel,
+    .pillar-card,
+    .contact-card,
+    .embed-card,
+    .booking-class-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow);
+    }
+    .hero-copy {
+      padding: 1.5rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+    }
+    h1 {
+      margin: 0.95rem 0 0.9rem;
+      font: 700 clamp(3rem, 12vw, 5.8rem)/0.92 "Oswald", "Noto Sans TC", sans-serif;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+    .hero-subtitle {
+      margin: 0;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+    .hero-copy p { margin: 0; color: var(--muted); max-width: 38rem; }
+    .hero-actions, .contact-actions, .sample-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .hero-card {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .hero-card strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+    .hero-card span {
+      display: block;
+      margin-top: 0.3rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .hero-frame {
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+      padding: 1.2rem;
       background:
-        radial-gradient(circle at top, rgba(255,255,255,.3), transparent 40%),
-        linear-gradient(135deg, rgba(241,220,200,.8), rgba(255,255,255,.35)),
-        #efe3d5;
-      display:grid;
-      place-items:center;
-      padding:2rem;
-      text-align:center;
+        radial-gradient(circle at top, rgba(192,132,87,0.2), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
     }
-    .hero-visual strong{
-      font:700 clamp(2rem, 8vw, 3.7rem)/.96 var(--display);
-      max-width:14rem;
+    .frame-tag {
+      display: inline-flex;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-    .hero-visual span{
-      display:block;
-      margin-top:.8rem;
-      color:var(--muted);
-      font:500 .8rem var(--mono);
-      letter-spacing:.12em;
-      text-transform:uppercase;
+    .hero-figure {
+      min-height: 360px;
+      margin-top: 1rem;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 30%),
+        linear-gradient(135deg, rgba(255,255,255,0.07), transparent 55%),
+        linear-gradient(180deg, rgba(192,132,87,0.08), rgba(0,0,0,0.08)),
+        #111;
+      position: relative;
+      overflow: hidden;
     }
-    .section{padding:1.1rem 0 0}
-    .section-shell{padding:1.3rem}
-    .section-head{
-      display:grid;
-      gap:.75rem;
-      padding-bottom:1rem;
-      margin-bottom:1rem;
-      border-bottom:1px solid var(--line);
+    .hero-figure::before,
+    .hero-figure::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(234,209,177,0.16);
     }
-    .section-head h2{
-      margin:0;
-      font:700 clamp(2.2rem, 8vw, 4rem)/.94 var(--display);
+    .hero-figure::after {
+      inset: auto 30px 30px 30px;
+      height: 76px;
+      border: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.6));
     }
-    .section-head p{margin:0;color:var(--muted);max-width:45rem}
-    .subhead{
-      display:block;
-      margin-top:.45rem;
-      color:var(--muted-2);
-      font:500 .78rem var(--mono);
-      letter-spacing:.14em;
-      text-transform:uppercase;
+    .frame-note {
+      margin-top: 1rem;
+      color: var(--muted);
     }
-    .grid,
-    .offer-grid,
-    .version-grid{display:grid;gap:1rem}
-    .card{
-      padding:1.2rem;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:rgba(255,255,255,.5);
+    .frame-note strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 0.35rem;
     }
-    .card h3{
-      margin:.8rem 0 .45rem;
-      font:700 1.8rem/1 var(--display);
+    .content-section { padding: 1.15rem 0 0; }
+    .section-head {
+      display: grid;
+      gap: 0.85rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
     }
-    .card p{margin:0;color:var(--muted)}
-    .meta{
-      margin:1rem 0 0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:.6rem;
+    .section-head h2 {
+      margin: 0;
+      font: 700 clamp(2rem, 6vw, 3.4rem)/0.98 "Oswald", "Noto Sans TC", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
     }
-    .meta li{
-      padding-top:.6rem;
-      border-top:1px dashed var(--line);
-      display:grid;
-      gap:.15rem;
+    .bilingual-title {
+      display: block;
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
-    .meta strong{
-      color:var(--accent-deep);
-      font:500 .74rem var(--mono);
-      letter-spacing:.12em;
-      text-transform:uppercase;
+    .section-head p { margin: 0; color: var(--muted); max-width: 46rem; }
+    .class-card, .panel, .pillar-card, .contact-card, .embed-card, .booking-class-card { padding: 1.25rem; }
+    .label, .mini-badge, .booking-class-meta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--gold);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-    .footer{
-      padding:1.25rem 0 2.4rem;
-      color:var(--muted);
+    h3 {
+      margin: 0.9rem 0 0.5rem;
+      font: 600 1.5rem/1.1 "Oswald", "Noto Sans TC", sans-serif;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
     }
-    .footer-grid{
-      display:grid;
-      gap:1rem;
-      padding-top:1.25rem;
-      border-top:1px solid var(--line);
+    .class-card p, .panel p, .pillar-card p, .contact-card p, .embed-card p, .booking-class-card p {
+      margin: 0;
+      color: var(--muted);
     }
-    .footer strong{
-      display:block;
-      color:var(--text);
-      font:700 1.05rem var(--display);
+    .class-meta, .contact-list, .notes-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.65rem;
     }
-    @media (min-width:820px){
-      .hero-grid{grid-template-columns:1.05fr .95fr}
-      .grid,
-      .offer-grid,
-      .version-grid,
-      .footer-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    .class-meta li, .contact-list li, .notes-list li {
+      padding-top: 0.65rem;
+      border-top: 1px dashed rgba(255,255,255,0.1);
+      color: var(--muted);
     }
-    @media (min-width:1040px){
-      .offer-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}
-      .version-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}
+    .class-meta strong, .contact-list strong {
+      color: var(--gold);
+      margin-right: 0.4rem;
+    }
+    .about-quote {
+      margin-top: 1rem;
+      padding: 1rem 1.1rem;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 16px 16px 0;
+      background: rgba(192,132,87,0.08);
+      color: var(--text);
+    }
+    .ig-link {
+      display: inline-flex;
+      margin-top: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .embed-shell {
+      margin-top: 1rem;
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background:
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.018), rgba(255,255,255,0.018) 8px, transparent 8px, transparent 16px),
+        #101010;
+      padding: 1.4rem;
+    }
+    .embed-shell strong { display: block; margin-bottom: 0.35rem; color: var(--text); }
+    .embed-shell span { color: var(--muted); }
+    .emoji {
+      font-size: 1.7rem;
+      display: inline-block;
+      margin-bottom: 0.7rem;
+    }
+    .footer {
+      padding: 1.4rem 0 2.5rem;
+      color: var(--muted);
+    }
+    .footer-grid {
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+    }
+    .footer-brand {
+      color: var(--text);
+      font: 700 1.15rem "Oswald", "Noto Sans TC", sans-serif;
+      text-transform: uppercase;
+    }
+    .footer-note {
+      margin-top: 0.3rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (min-width: 720px) {
+      .classes-grid,
+      .pillars-grid,
+      .booking-grid,
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 980px) {
+      .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr); align-items: stretch; }
+      .classes-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .about-grid, .contact-grid, .booking-grid, .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .pillars-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -265,125 +415,235 @@
   <header class="site-header">
     <div class="container header-shell">
       <a class="brand" href="#top">
-        <small>Version 02</small>
-        <strong>Harbour Reformer Studio</strong>
+        <span class="brand-mark">HP</span>
+        <span class="brand-text">
+          <small>Hong Kong Pilates Studio</small>
+          <strong>Harbour Pilates Studio</strong>
+        </span>
       </a>
-      <nav class="nav">
+      <nav class="nav-links" aria-label="樣板切換">
         <a href="index.html">Boxing</a>
-        <a href="pilates-studio.html">Pilates</a>
+        <a class="active" href="pilates-studio.html">Pilates</a>
         <a href="barber-house.html">Barber</a>
-        <a class="cta" href="#contact">Book Intro</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="container hero-shell">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <span class="eyebrow">Pilates Studio Website</span>
-            <h1>身體回到更穩定、更輕盈的狀態</h1>
-            <p class="lead">
-              Harbour Reformer Studio 專注小班 reformer 與私教課，幫助客人改善姿勢、提升核心控制，
-              同時在忙碌生活中找回規律與節奏。這一版適合預約型工作室、女性客群與重視質感的本地品牌。
-            </p>
-            <div class="actions">
-              <a class="button primary" href="#programs">查看課程</a>
-              <a class="button secondary" href="#contact">立即查詢</a>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal visible">
+          <span class="eyebrow">Boutique Pilates Studio</span>
+          <h1>身體，不只是<br>拉開而已</h1>
+          <p class="hero-subtitle">Hong Kong Reformer Pilates | Core, Posture, Strength</p>
+          <p>
+            Harbour Pilates Studio 專注於 reformer、小班與私人訓練體驗。
+            由呼吸、核心控制、姿勢排列到日常身體習慣，我們用清晰教學和穩定節奏，
+            讓初學者安心開始，也讓固定訓練的人持續進步。
+          </p>
+          <div class="hero-actions">
+            <a class="cta-link cta-primary" href="#booking">預約體驗 / Book Intro</a>
+            <a class="cta-link cta-secondary" href="#contact">立即查詢</a>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-card">
+              <strong>Small Group</strong>
+              <span>課堂人數清楚控制，教練可以兼顧每位學員動作細節。</span>
             </div>
-            <div class="hero-notes">
-              <div class="hero-note">
-                <strong>小班課節奏清楚</strong>
-                <span>初學者容易上手，回頭客亦能穩定進步。</span>
-              </div>
-              <div class="hero-note">
-                <strong>工作室預約感強</strong>
-                <span>非常適合搭配 WhatsApp、表單或行事曆預約流程。</span>
-              </div>
+            <div class="hero-card">
+              <strong>Technique First</strong>
+              <span>由身體控制開始，不追求花巧，先建立穩定根基。</span>
+            </div>
+            <div class="hero-card">
+              <strong>Private Sessions</strong>
+              <span>適合想改善姿勢、產後重啟或有明確訓練目標的人。</span>
+            </div>
+            <div class="hero-card">
+              <strong>Local Studio</strong>
+              <span>適合香港本地工作室品牌，直接、清楚、容易預約。</span>
             </div>
           </div>
-          <div class="hero-visual">
-            <div>
-              <strong>Aligned Body Calm Mind</strong>
-              <span>Hong Kong Reformer Pilates</span>
-            </div>
+        </div>
+        <div class="hero-frame reveal">
+          <span class="frame-tag">Harbour Pilates</span>
+          <div class="hero-figure" aria-hidden="true"></div>
+          <div class="frame-note">
+            <strong>Body Alignment. Controlled Strength.</strong>
+            <span>這種版型適合精品工作室、reformer studio、產後恢復與姿勢訓練品牌。</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="programs">
-      <div class="container section-shell">
-        <div class="section-head">
+    <section class="content-section" id="classes">
+      <div class="container">
+        <div class="section-head reveal">
           <span class="eyebrow">Programs</span>
-          <h2>課程安排<span class="subhead">適合私教工作室、精品課程與女性客群網站</span></h2>
-          <p>客人可以直接看清楚不同課程的形式、目標與適合程度，再決定最合適的安排。</p>
+          <h2>課程安排<span class="bilingual-title">Reformer and Private Training</span></h2>
+          <p>客人可以清楚知道每一課的目標、適合對象與上課形式，減少查詢成本，提升預約效率。</p>
         </div>
-        <div class="offer-grid">
-          <article class="card">
-            <h3>Intro Reformer</h3>
-            <p>適合第一次接觸 pilates 的客人，從呼吸、核心與器械控制開始。</p>
-            <ul class="meta">
-              <li><strong>Class Type</strong><span>Beginner Small Group</span></li>
-              <li><strong>Goal</strong><span>建立穩定動作基礎與課堂信心。</span></li>
+        <div class="classes-grid">
+          <article class="class-card reveal">
+            <span class="label">Reformer Basics</span>
+            <h3>初學入門課</h3>
+            <p>適合第一次接觸 pilates 的學員，由呼吸、核心與器械控制開始。</p>
+            <ul class="class-meta">
+              <li><strong>形式</strong>Small group introduction</li>
+              <li><strong>適合對象</strong>新手、想建立身體意識與基礎控制的人。</li>
             </ul>
           </article>
-          <article class="card">
-            <h3>Posture Reset</h3>
-            <p>針對久坐、肩頸緊張與下背不適，改善日常姿勢與發力模式。</p>
-            <ul class="meta">
-              <li><strong>Class Type</strong><span>Signature Group Class</span></li>
-              <li><strong>Goal</strong><span>改善身體排列與日常舒適度。</span></li>
+          <article class="class-card reveal">
+            <span class="label">Core Flow</span>
+            <h3>核心穩定課</h3>
+            <p>集中改善腹部、臀部、下背與骨盆穩定，幫助提升日常支撐力。</p>
+            <ul class="class-meta">
+              <li><strong>重點</strong>Core control, balance, posture</li>
+              <li><strong>程度</strong>All levels welcome</li>
             </ul>
           </article>
-          <article class="card">
-            <h3>Private Session</h3>
-            <p>一對一調整動作、安排訓練節奏，適合產後、復健後或特定目標客人。</p>
-            <ul class="meta">
-              <li><strong>Class Type</strong><span>1-on-1 Coaching</span></li>
-              <li><strong>Goal</strong><span>更精準、更有針對性的進度安排。</span></li>
+          <article class="class-card reveal">
+            <span class="label">Stretch Reset</span>
+            <h3>伸展修復課</h3>
+            <p>適合久坐、肩頸緊張或高壓工作狀態下，重新整理身體張力。</p>
+            <ul class="class-meta">
+              <li><strong>目標</strong>Mobility and recovery</li>
+              <li><strong>適合對象</strong>辦公室人士、運動後修復需求客人。</li>
+            </ul>
+          </article>
+          <article class="class-card reveal">
+            <span class="label">Private Session</span>
+            <h3>私人訓練</h3>
+            <p>根據姿勢評估、目標與身體狀態安排內容，改善速度更集中。</p>
+            <ul class="class-meta">
+              <li><strong>形式</strong>1-on-1 coaching</li>
+              <li><strong>安排</strong>Flexible schedule，方便配合個人時間。</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container section-shell">
-        <div class="section-head">
-          <span class="eyebrow">Why It Works</span>
-          <h2>這個版本適合怎樣的生意<span class="subhead">清楚、安靜、重視服務細節與預約體驗</span></h2>
-          <p>如果你的客人重視空間感、信任感與預約前資訊，這種內容結構會比「只放幾張圖」更容易轉化。</p>
+    <section class="content-section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">About Us</span>
+          <h2>關於我們<span class="bilingual-title">Boutique Pilates Studio in Hong Kong</span></h2>
         </div>
-        <div class="grid">
-          <article class="card">
-            <h3>服務說清楚</h3>
-            <p>每項課程都有明確目標、程度與適合對象，第一次接觸的人都容易理解。</p>
+        <div class="about-grid">
+          <article class="panel reveal">
+            <h3>用清楚教學，建立可持續的訓練習慣</h3>
+            <p>
+              Harbour Pilates Studio 重視的不只是動作做完，而是身體有沒有真正理解和控制。
+              我們由排列、穩定、呼吸與節奏開始，讓學員在舒服和安全的前提下，
+              一步一步建立更穩定的身體基礎。
+            </p>
+            <div class="about-quote">
+              這一種網站方向特別適合精品工作室、女性客群、姿勢改善與預約型服務品牌。
+            </div>
+            <a class="ig-link" href="#contact">Book an Intro Session</a>
           </article>
-          <article class="card">
-            <h3>預約動線自然</h3>
-            <p>從品牌介紹、課程、到聯絡方式一氣呵成，特別適合 WhatsApp 或表單預約。</p>
+          <article class="embed-card reveal">
+            <span class="mini-badge">Studio Atmosphere</span>
+            <h3>空間感、節奏感、信任感</h3>
+            <p>客人打開網站時，最先感受到的是品牌氣質與服務方式，而不是一堆零散資訊。</p>
+            <div class="embed-shell" role="img" aria-label="Studio story block">
+              <div>
+                <strong>Clean, calm, premium</strong>
+                <span>網站可以放入課堂片段、導師簡介、客人評語與試堂流程。</span>
+              </div>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="container section-shell">
-        <div class="section-head">
+    <section class="content-section" id="gym-life">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Studio Content</span>
+          <h2>工作室日常<span class="bilingual-title">What Clients Want to See Before Booking</span></h2>
+          <p>這一區展示的不只是品牌形象，而是客人預約前最想知道的真實內容。</p>
+        </div>
+        <div class="pillars-grid">
+          <article class="pillar-card reveal">
+            <span class="emoji">🧘</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>動作教學</h3>
+            <p>以簡單方式解釋 reformer 基礎、姿勢控制與呼吸方法，增加信任感。</p>
+          </article>
+          <article class="pillar-card reveal">
+            <span class="emoji">🌿</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>課堂節奏</h3>
+            <p>展示工作室空間、上課氣氛和教練示範，讓新客更容易想像第一次上課。</p>
+          </article>
+          <article class="pillar-card reveal">
+            <span class="emoji">✨</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>真實成果</h3>
+            <p>可以放學員回饋、身體改善方向與課後感受，提升預約轉化。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
           <span class="eyebrow">Contact</span>
-          <h2>聯絡與預約<span class="subhead">客人可以直接查詢時間、價目與試堂安排</span></h2>
-          <p>這類工作室網站最重要的是讓客人放心聯絡，所以內容會優先講清楚課程與預約方式。</p>
+          <h2>聯絡與查詢<span class="bilingual-title">Trial Class, Pricing, Location</span></h2>
+          <p>客人可以在這裡直接查詢試堂、私人訓練、工作室位置和可預約時間。</p>
         </div>
-        <div class="grid">
-          <article class="card">
-            <h3>預約入口</h3>
-            <p>WhatsApp、Instagram 與試堂表單都可以放在同一區，讓客人最快完成第一步。</p>
+        <div class="contact-grid">
+          <article class="contact-card reveal">
+            <h3>聯絡資料</h3>
+            <ul class="contact-list">
+              <li><strong>Instagram</strong>@harbourpilates.hk</li>
+              <li><strong>WhatsApp</strong>+852 9123 4567</li>
+              <li><strong>Location</strong>Central / Sheung Wan, Hong Kong</li>
+            </ul>
+            <div class="contact-actions">
+              <a class="cta-link cta-primary" href="#booking">預約試堂</a>
+              <a class="cta-link cta-secondary" href="#top">返回頁首</a>
+            </div>
           </article>
-          <article class="card">
-            <h3>位置資訊</h3>
-            <p>可展示中環、上環或銅鑼灣等工作室地點，並附上地圖與到達方式。</p>
+          <article class="embed-card reveal">
+            <h3>到訪資訊</h3>
+            <p>網站可直接整合 Google Maps、營業時間、試堂流程及首次到訪須知，方便客人立即決定。</p>
+            <div class="embed-shell" role="img" aria-label="Visit info block">
+              <div>
+                <strong>Location and directions</strong>
+                <span>可在此展示詳細地址、最近港鐵出口和到訪提示。</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="booking">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Booking</span>
+          <h2>立即預約<span class="bilingual-title">Book an Intro Class or Private Session</span></h2>
+          <p>這種工作室網站最重要的是讓客人一眼看懂怎樣開始，再自然地進入查詢或預約動作。</p>
+        </div>
+        <div class="booking-grid">
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">Intro Flow</span>
+            <h3>試堂安排</h3>
+            <p>第一次上課可先預約入門課或私人訓練，教練會按程度安排最適合的開始方式。</p>
+            <div class="sample-links">
+              <a class="cta-link cta-primary" href="#contact">立即查詢</a>
+            </div>
+          </article>
+          <article class="panel reveal">
+            <h3 style="margin-top:0">這個 sample 適合怎樣的客</h3>
+            <ul class="notes-list">
+              <li>精品工作室、女性客群、姿勢改善服務。</li>
+              <li>想用網站取代大量 DM 解釋的預約型生意。</li>
+              <li>需要清楚品牌氣質、課堂內容與試堂流程展示。</li>
+            </ul>
           </article>
         </div>
       </div>
@@ -393,13 +653,30 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <strong>Harbour Reformer Studio</strong>
-        <span>Version 02 / Pilates Studio</span>
+        <div class="footer-brand">Harbour Pilates Studio</div>
+        <div class="footer-note">Version 02 / Pilates</div>
       </div>
       <div>
-        <span>另外版本：<a href="index.html">Boxing</a> / <a href="barber-house.html">Barber</a></span>
+        <div>Other samples: <a href="index.html">Boxing</a> / <a href="barber-house.html">Barber</a></div>
       </div>
     </div>
   </footer>
+
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    revealItems.forEach((item) => {
+      if (!item.classList.contains("visible")) {
+        revealObserver.observe(item);
+      }
+    });
+  </script>
 </body>
 </html>

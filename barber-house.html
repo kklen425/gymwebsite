@@ -6,272 +6,402 @@
   <title>Central Fade House</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#12100f;
-      --surface:#1a1715;
-      --surface-2:#221d1a;
-      --line:rgba(255,255,255,.09);
-      --text:#f4efe8;
-      --muted:#b7afa6;
-      --muted-2:#84796d;
-      --gold:#c39a5a;
-      --gold-deep:#8c6a35;
-      --shadow:0 24px 60px rgba(0,0,0,.32);
-      --max:1180px;
-      --radius:24px;
-      --display:"Bebas Neue","Noto Sans TC",sans-serif;
-      --body:"Noto Sans TC","Segoe UI",sans-serif;
-      --mono:"JetBrains Mono",monospace;
+    :root {
+      --bg: #090909;
+      --panel: rgba(255, 255, 255, 0.05);
+      --text: #f5f1e8;
+      --muted: #b6ada2;
+      --line: rgba(255, 255, 255, 0.11);
+      --accent: #b88947;
+      --accent-strong: #d0a96e;
+      --accent-soft: rgba(184, 137, 71, 0.16);
+      --gold: #ead7b7;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --content-width: 1180px;
+      --nav-height: 78px;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      font:16px/1.65 var(--body);
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
+      color: var(--text);
       background:
-        radial-gradient(circle at top right, rgba(195,154,90,.13), transparent 24%),
-        linear-gradient(180deg, #191614 0%, #12100f 48%, #0d0c0b 100%);
+        radial-gradient(circle at top right, rgba(184, 137, 71, 0.18), transparent 24%),
+        radial-gradient(circle at top left, rgba(234, 215, 183, 0.07), transparent 20%),
+        linear-gradient(180deg, #131110 0%, #090909 44%, #050505 100%);
+      min-height: 100vh;
+      line-height: 1.65;
     }
-    a{text-decoration:none;color:inherit}
-    .container{width:min(calc(100% - 2rem), var(--max));margin:0 auto}
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      background:rgba(18,16,15,.82);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--line);
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.024) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.45), transparent 88%);
+      opacity: 0.4;
     }
-    .header-shell{
-      min-height:76px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:1rem;
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 2rem), var(--content-width)); margin: 0 auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(9,9,9,0.86);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:.15rem;
+    .header-shell {
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
-    .brand small{
-      color:var(--gold);
-      font:500 .72rem var(--mono);
-      letter-spacing:.18em;
-      text-transform:uppercase;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
-    .brand strong{
-      font:400 1.9rem/1 var(--display);
-      letter-spacing:.05em;
-      text-transform:uppercase;
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(208,169,110,0.95), rgba(103,74,31,0.9));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+      font-size: 0.92rem;
+      font-weight: 800;
     }
-    .nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.55rem}
-    .nav a{
-      padding:.72rem 1rem;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--muted);
-      font:500 .78rem var(--mono);
-      letter-spacing:.08em;
-      text-transform:uppercase;
+    .brand-text small {
+      display: block;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
-    .nav a.cta{
-      color:#1a1612;
-      background:linear-gradient(180deg, #d5b07a, var(--gold));
-      border-color:transparent;
+    .brand-text strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
     }
-    .hero{padding:1.2rem 0 0}
-    .hero-shell,
-    .section-shell{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-      overflow:hidden;
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.6rem;
     }
-    .hero-grid,
-    .grid,
-    .service-grid,
-    .version-grid{display:grid;gap:1rem}
-    .hero-copy{padding:1.35rem}
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
-      padding:.38rem .75rem;
-      border-radius:999px;
-      border:1px solid rgba(195,154,90,.3);
-      background:rgba(195,154,90,.1);
-      color:#e4c896;
-      font:500 .72rem var(--mono);
-      letter-spacing:.12em;
-      text-transform:uppercase;
+    .nav-links a {
+      padding: 0.72rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 0.84rem;
     }
-    .eyebrow::before{
-      content:"";
-      width:7px;
-      height:7px;
-      border-radius:999px;
-      background:var(--gold);
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
     }
-    h1{
-      margin:.85rem 0 1rem;
-      font:400 clamp(3.4rem, 15vw, 6.4rem)/.9 var(--display);
-      letter-spacing:.04em;
-      text-transform:uppercase;
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 54px;
+      padding: 0 1.35rem;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
     }
-    .lead{margin:0;max-width:40rem;color:var(--muted)}
-    .actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.4rem}
-    .button{
-      min-height:48px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:0 1.15rem;
-      border-radius:16px;
-      border:1px solid transparent;
-      font:600 .92rem var(--body);
-      transition:transform .2s ease;
+    .cta-link:hover { transform: translateY(-2px); }
+    .cta-primary {
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #17120c;
+      box-shadow: 0 18px 32px rgba(184,137,71,0.24);
     }
-    .button:hover{transform:translateY(-2px)}
-    .button.primary{
-      color:#1a1612;
-      background:linear-gradient(180deg, #d5b07a, var(--gold));
-      box-shadow:0 16px 30px rgba(195,154,90,.18);
+    .cta-secondary {
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
     }
-    .button.secondary{
-      border-color:var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--text);
+    section { scroll-margin-top: calc(var(--nav-height) + 18px); }
+    .hero { padding: 3rem 0 2rem; }
+    .hero-grid, .classes-grid, .about-grid, .pillars-grid, .contact-grid, .booking-grid, .footer-grid {
+      display: grid;
+      gap: 1rem;
     }
-    .hero-badges{
-      display:grid;
-      gap:.8rem;
-      margin-top:1.4rem;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
     }
-    .hero-badge{
-      padding:1rem;
-      border-radius:18px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-strong);
     }
-    .hero-badge strong{
-      display:block;
-      color:#f2dbb4;
-      font:400 1.4rem var(--display);
-      letter-spacing:.03em;
-      text-transform:uppercase;
+    .hero-copy,
+    .hero-frame,
+    .class-card,
+    .panel,
+    .pillar-card,
+    .contact-card,
+    .embed-card,
+    .booking-class-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow);
     }
-    .hero-badge span{display:block;color:var(--muted)}
-    .hero-visual{
-      min-height:360px;
+    .hero-copy {
+      padding: 1.5rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+    }
+    h1 {
+      margin: 0.95rem 0 0.9rem;
+      font: 700 clamp(3rem, 12vw, 5.8rem)/0.92 "Oswald", "Noto Sans TC", sans-serif;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+    .hero-subtitle {
+      margin: 0;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+    .hero-copy p { margin: 0; color: var(--muted); max-width: 38rem; }
+    .hero-actions, .contact-actions, .sample-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .hero-card {
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .hero-card strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+    .hero-card span {
+      display: block;
+      margin-top: 0.3rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .hero-frame {
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+      padding: 1.2rem;
       background:
-        radial-gradient(circle at 20% 20%, rgba(195,154,90,.15), transparent 20%),
-        linear-gradient(135deg, rgba(255,255,255,.05), transparent 50%),
-        #141210;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      padding:2rem;
+        radial-gradient(circle at top, rgba(184,137,71,0.2), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
     }
-    .hero-visual strong{
-      font:400 clamp(2.6rem, 8vw, 4.4rem)/.9 var(--display);
-      letter-spacing:.06em;
-      text-transform:uppercase;
+    .frame-tag {
+      display: inline-flex;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #17120c;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
     }
-    .hero-visual span{
-      display:block;
-      margin-top:.8rem;
-      color:var(--muted);
-      font:500 .78rem var(--mono);
-      letter-spacing:.14em;
-      text-transform:uppercase;
+    .hero-figure {
+      min-height: 360px;
+      margin-top: 1rem;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 30%),
+        linear-gradient(135deg, rgba(255,255,255,0.07), transparent 55%),
+        linear-gradient(180deg, rgba(184,137,71,0.08), rgba(0,0,0,0.08)),
+        #111;
+      position: relative;
+      overflow: hidden;
     }
-    .section{padding:1.1rem 0 0}
-    .section-shell{padding:1.3rem}
-    .section-head{
-      display:grid;
-      gap:.75rem;
-      padding-bottom:1rem;
-      margin-bottom:1rem;
-      border-bottom:1px solid var(--line);
+    .hero-figure::before,
+    .hero-figure::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(234,215,183,0.16);
     }
-    .section-head h2{
-      margin:0;
-      font:400 clamp(2.6rem, 9vw, 4.4rem)/.94 var(--display);
-      letter-spacing:.04em;
-      text-transform:uppercase;
+    .hero-figure::after {
+      inset: auto 30px 30px 30px;
+      height: 76px;
+      border: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.6));
     }
-    .section-head p{margin:0;color:var(--muted);max-width:46rem}
-    .subhead{
-      display:block;
-      margin-top:.45rem;
-      color:var(--muted-2);
-      font:500 .78rem var(--mono);
-      letter-spacing:.14em;
-      text-transform:uppercase;
+    .frame-note {
+      margin-top: 1rem;
+      color: var(--muted);
     }
-    .card{
-      padding:1.2rem;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:rgba(255,255,255,.03);
+    .frame-note strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 0.35rem;
     }
-    .card h3{
-      margin:.75rem 0 .4rem;
-      font:400 1.8rem/1 var(--display);
-      letter-spacing:.03em;
-      text-transform:uppercase;
+    .content-section { padding: 1.15rem 0 0; }
+    .section-head {
+      display: grid;
+      gap: 0.85rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--line);
     }
-    .card p{margin:0;color:var(--muted)}
-    .meta{
-      margin:1rem 0 0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:.6rem;
+    .section-head h2 {
+      margin: 0;
+      font: 700 clamp(2rem, 6vw, 3.4rem)/0.98 "Oswald", "Noto Sans TC", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
     }
-    .meta li{
-      padding-top:.6rem;
-      border-top:1px dashed var(--line);
-      display:grid;
-      gap:.15rem;
+    .bilingual-title {
+      display: block;
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
-    .meta strong{
-      color:#f2dbb4;
-      font:500 .74rem var(--mono);
-      letter-spacing:.12em;
-      text-transform:uppercase;
+    .section-head p { margin: 0; color: var(--muted); max-width: 46rem; }
+    .class-card, .panel, .pillar-card, .contact-card, .embed-card, .booking-class-card { padding: 1.25rem; }
+    .label, .mini-badge, .booking-class-meta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--gold);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-    .footer{
-      padding:1.25rem 0 2.4rem;
-      color:var(--muted);
+    h3 {
+      margin: 0.9rem 0 0.5rem;
+      font: 600 1.5rem/1.1 "Oswald", "Noto Sans TC", sans-serif;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
     }
-    .footer-grid{
-      display:grid;
-      gap:1rem;
-      padding-top:1.25rem;
-      border-top:1px solid var(--line);
+    .class-card p, .panel p, .pillar-card p, .contact-card p, .embed-card p, .booking-class-card p {
+      margin: 0;
+      color: var(--muted);
     }
-    .footer strong{
-      display:block;
-      color:var(--text);
-      font:400 1.7rem var(--display);
-      letter-spacing:.04em;
-      text-transform:uppercase;
+    .class-meta, .contact-list, .notes-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.65rem;
     }
-    @media (min-width:820px){
-      .hero-grid{grid-template-columns:1.05fr .95fr}
-      .grid,
-      .footer-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    .class-meta li, .contact-list li, .notes-list li {
+      padding-top: 0.65rem;
+      border-top: 1px dashed rgba(255,255,255,0.1);
+      color: var(--muted);
     }
-    @media (min-width:1040px){
-      .service-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}
-      .version-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}
+    .class-meta strong, .contact-list strong {
+      color: var(--gold);
+      margin-right: 0.4rem;
+    }
+    .about-quote {
+      margin-top: 1rem;
+      padding: 1rem 1.1rem;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 16px 16px 0;
+      background: rgba(184,137,71,0.08);
+      color: var(--text);
+    }
+    .embed-shell {
+      margin-top: 1rem;
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background:
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.018), rgba(255,255,255,0.018) 8px, transparent 8px, transparent 16px),
+        #101010;
+      padding: 1.4rem;
+    }
+    .embed-shell strong { display: block; margin-bottom: 0.35rem; color: var(--text); }
+    .embed-shell span { color: var(--muted); }
+    .emoji {
+      font-size: 1.7rem;
+      display: inline-block;
+      margin-bottom: 0.7rem;
+    }
+    .footer {
+      padding: 1.4rem 0 2.5rem;
+      color: var(--muted);
+    }
+    .footer-grid {
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--line);
+    }
+    .footer-brand {
+      color: var(--text);
+      font: 700 1.15rem "Oswald", "Noto Sans TC", sans-serif;
+      text-transform: uppercase;
+    }
+    .footer-note {
+      margin-top: 0.3rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (min-width: 720px) {
+      .classes-grid,
+      .pillars-grid,
+      .booking-grid,
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 980px) {
+      .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr); align-items: stretch; }
+      .classes-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .about-grid, .contact-grid, .booking-grid, .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .pillars-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -279,125 +409,233 @@
   <header class="site-header">
     <div class="container header-shell">
       <a class="brand" href="#top">
-        <small>Version 03</small>
-        <strong>Central Fade House</strong>
+        <span class="brand-mark">CF</span>
+        <span class="brand-text">
+          <small>Hong Kong Barber House</small>
+          <strong>Central Fade House</strong>
+        </span>
       </a>
-      <nav class="nav">
+      <nav class="nav-links" aria-label="樣板切換">
         <a href="index.html">Boxing</a>
         <a href="pilates-studio.html">Pilates</a>
-        <a href="barber-house.html">Barber</a>
-        <a class="cta" href="#contact">Book Now</a>
+        <a class="active" href="barber-house.html">Barber</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="container hero-shell">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <span class="eyebrow">Barber Shop Website</span>
-            <h1>Cut Clean Look Sharp</h1>
-            <p class="lead">
-              Central Fade House 以俐落修剪、穩定服務流程與到店體驗為核心。
-              這個版本適合男士理髮店、barber house、grooming brand 或任何重視形象與回頭客的本地生意。
-            </p>
-            <div class="actions">
-              <a class="button primary" href="#services">查看服務</a>
-              <a class="button secondary" href="#contact">WhatsApp 預約</a>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal visible">
+          <span class="eyebrow">Premium Barber House</span>
+          <h1>剪裁，不只是<br>整理而已</h1>
+          <p class="hero-subtitle">Hong Kong Barber Shop | Fade, Beard, Grooming</p>
+          <p>
+            Central Fade House 以乾淨修剪、穩定服務和到店體驗為核心。
+            無論客人想要日常俐落 fade、鬍型整理，還是重要場合前的完整 grooming，
+            網站都可以清楚講好服務、流程與預約方式，讓客人更快落單。
+          </p>
+          <div class="hero-actions">
+            <a class="cta-link cta-primary" href="#booking">立即預約 / Book Now</a>
+            <a class="cta-link cta-secondary" href="#contact">查看服務</a>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-card">
+              <strong>Service First</strong>
+              <span>客人先知道剪什麼、幾耐、幾多錢，再決定是否預約。</span>
             </div>
-            <div class="hero-badges">
-              <div class="hero-badge">
-                <strong>Walk-in + Booking</strong>
-                <span>適合同時接 walk-in 與預約客，網站可清楚講好流程與服務內容。</span>
-              </div>
-              <div class="hero-badge">
-                <strong>Service-first Layout</strong>
-                <span>把髮型、價目、時段與位置放到最容易轉化的位置。</span>
-              </div>
+            <div class="hero-card">
+              <strong>Walk-in + Booking</strong>
+              <span>適合同時接 walk-in 和預約客的本地理髮店。</span>
+            </div>
+            <div class="hero-card">
+              <strong>Repeat Customers</strong>
+              <span>清楚展示回店整理、修邊和完整 service 套餐。</span>
+            </div>
+            <div class="hero-card">
+              <strong>Local Shop Style</strong>
+              <span>成熟、直接、夠俐落，特別適合理髮與 grooming 品牌。</span>
             </div>
           </div>
-          <div class="hero-visual">
-            <div>
-              <strong>Precision Cuts Daily Rituals</strong>
-              <span>Hong Kong Barber House</span>
-            </div>
+        </div>
+        <div class="hero-frame reveal">
+          <span class="frame-tag">Central Fade House</span>
+          <div class="hero-figure" aria-hidden="true"></div>
+          <div class="frame-note">
+            <strong>Clean fades. Sharp details. Strong return visits.</strong>
+            <span>這種網站方向特別適合理髮店、barber house、男士 grooming 及本地 service business。</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="services">
-      <div class="container section-shell">
-        <div class="section-head">
+    <section class="content-section" id="classes">
+      <div class="container">
+        <div class="section-head reveal">
           <span class="eyebrow">Services</span>
-          <h2>服務內容<span class="subhead">適合理髮店、barber house 與男士 grooming brand</span></h2>
-          <p>客人最關心的是做什麼、多少時間、幾多錢，所以這類網站要把服務講得夠直接。</p>
+          <h2>服務內容<span class="bilingual-title">Cuts, Beard, Grooming Packages</span></h2>
+          <p>網站會先把最重要的服務講清楚，讓客人不用 DM 問一輪才知道有什麼選擇。</p>
         </div>
-        <div class="service-grid">
-          <article class="card">
-            <h3>Signature Fade</h3>
-            <p>俐落漸層與輪廓修整，適合想保持乾淨形象的上班族與固定回店客人。</p>
-            <ul class="meta">
-              <li><strong>Duration</strong><span>45 mins</span></li>
-              <li><strong>Includes</strong><span>Cut, styling, neckline finish</span></li>
+        <div class="classes-grid">
+          <article class="class-card reveal">
+            <span class="label">Signature Fade</span>
+            <h3>經典漸層修剪</h3>
+            <p>適合保持乾淨輪廓和利落形象的固定客人，最容易成為回店主力服務。</p>
+            <ul class="class-meta">
+              <li><strong>時間</strong>45 mins</li>
+              <li><strong>適合對象</strong>上班族、學生、固定整理髮型客人。</li>
             </ul>
           </article>
-          <article class="card">
-            <h3>Cut + Beard</h3>
-            <p>髮型與鬍型一併整理，整體更完整，亦適合拍攝或重要場合前預約。</p>
-            <ul class="meta">
-              <li><strong>Duration</strong><span>60 mins</span></li>
-              <li><strong>Includes</strong><span>Haircut, beard trim, hot towel finish</span></li>
+          <article class="class-card reveal">
+            <span class="label">Cut + Beard</span>
+            <h3>髮型加鬍型整理</h3>
+            <p>同時處理髮型輪廓與鬍型線條，適合約會、拍攝和重要場合前預約。</p>
+            <ul class="class-meta">
+              <li><strong>內容</strong>Cut, beard trim, outline finish</li>
+              <li><strong>定位</strong>高價值組合服務，提升客單價。</li>
             </ul>
           </article>
-          <article class="card">
-            <h3>Weekly Clean-up</h3>
-            <p>快速修邊與整理，讓回頭客可以更頻密維持整潔外觀。</p>
-            <ul class="meta">
-              <li><strong>Duration</strong><span>20 mins</span></li>
-              <li><strong>Includes</strong><span>Line-up, neck clean, quick styling</span></li>
+          <article class="class-card reveal">
+            <span class="label">Clean-Up Visit</span>
+            <h3>快速修邊</h3>
+            <p>適合短週期回店客人，只做輪廓和頸位修整，維持整體乾淨度。</p>
+            <ul class="class-meta">
+              <li><strong>時間</strong>20 mins</li>
+              <li><strong>適合對象</strong>每星期或每兩星期回店整理的常客。</li>
+            </ul>
+          </article>
+          <article class="class-card reveal">
+            <span class="label">Grooming Session</span>
+            <h3>完整造型整理</h3>
+            <p>包括 haircut、beard、造型和整體 finish，適合高端服務和節日前預約。</p>
+            <ul class="class-meta">
+              <li><strong>內容</strong>Full grooming package</li>
+              <li><strong>作用</strong>提升品牌定位與店舖專業感。</li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container section-shell">
-        <div class="section-head">
-          <span class="eyebrow">Content Structure</span>
-          <h2>這個版本的賣點<span class="subhead">成熟、直接、強調到店體驗與服務細節</span></h2>
-          <p>如果你要賣網站給本地商戶，barber 版本很適合展示「不是淨係靚，而係真係幫到客人預約」。</p>
+    <section class="content-section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">About Us</span>
+          <h2>關於店舖<span class="bilingual-title">Modern Barber Service With Local Character</span></h2>
         </div>
-        <div class="grid">
-          <article class="card">
-            <h3>價目與服務夠清楚</h3>
-            <p>不用客人來回 DM 才知道有什麼服務，網站已經先處理常見問題。</p>
+        <div class="about-grid">
+          <article class="panel reveal">
+            <h3>網站不是只放幾張相，而是幫客人更快預約</h3>
+            <p>
+              Central Fade House 這個 sample 方向，重點是把服務、價目、時段與位置整理得夠清楚，
+              讓第一次接觸的客人知道店舖風格，也讓固定回店客人更容易直接落 booking。
+            </p>
+            <div class="about-quote">
+              對理髮店來說，網站最重要不是講得太多，而是讓客人一眼見到服務內容、到店方式和預約入口。
+            </div>
           </article>
-          <article class="card">
-            <h3>到店路線與預約方便</h3>
-            <p>可直接放地圖、營業時間、WhatsApp 按鈕與理髮師時段，轉化會更高。</p>
+          <article class="embed-card reveal">
+            <span class="mini-badge">Shop Atmosphere</span>
+            <h3>成熟、乾淨、可重複回訪</h3>
+            <p>可放理髮師作品、店舖空間、客人前後對比與品牌風格照片，提升信任感。</p>
+            <div class="embed-shell" role="img" aria-label="Shop brand block">
+              <div>
+                <strong>Barber portfolio and service story</strong>
+                <span>網站可結合作品集、營業時間、預約說明和常見問題。</span>
+              </div>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="container section-shell">
-        <div class="section-head">
+    <section class="content-section" id="gym-life">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Shop Content</span>
+          <h2>店舖日常<span class="bilingual-title">What Helps Convert Walk-ins Into Bookings</span></h2>
+          <p>理髮店網站最有用的內容，不是空泛口號，而是讓客人知道你剪得怎樣、服務節奏如何、到店感受如何。</p>
+        </div>
+        <div class="pillars-grid">
+          <article class="pillar-card reveal">
+            <span class="emoji">✂️</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>作品展示</h3>
+            <p>直接展示 fade、crop、beard line-up 等不同風格，客人會更容易找到自己想剪的方向。</p>
+          </article>
+          <article class="pillar-card reveal">
+            <span class="emoji">🪒</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>服務過程</h3>
+            <p>放入洗頭、修邊、熱毛巾、造型 finish 等片段，提升完整服務感。</p>
+          </article>
+          <article class="pillar-card reveal">
+            <span class="emoji">📍</span>
+            <span class="mini-badge">Content Pillar</span>
+            <h3>到店資訊</h3>
+            <p>營業時間、位置、walk-in / booking 流程講清楚，讓手機用戶可以即刻行動。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
           <span class="eyebrow">Contact</span>
-          <h2>預約與到店資訊<span class="subhead">男士理髮店最重要是夠直接、夠快、夠容易聯絡</span></h2>
-          <p>客人可以立即看見 WhatsApp 預約、營業時間與店舖位置，不需要兜圈問一輪先知點預約。</p>
+          <h2>聯絡與到店資訊<span class="bilingual-title">Whatsapp, Address, Hours</span></h2>
+          <p>對服務型店舖來說，聯絡方式、店舖位置和營業時間都應該一眼看見。</p>
         </div>
-        <div class="grid">
-          <article class="card">
-            <h3>預約方式</h3>
-            <p>WhatsApp、Instagram、Google Maps 與價目表都可以集中在同一區，手機瀏覽亦非常清晰。</p>
+        <div class="contact-grid">
+          <article class="contact-card reveal">
+            <h3>店舖資料</h3>
+            <ul class="contact-list">
+              <li><strong>Instagram</strong>@centralfadehouse.hk</li>
+              <li><strong>WhatsApp</strong>+852 9123 4567</li>
+              <li><strong>Location</strong>Tsim Sha Tsui / Central, Hong Kong</li>
+            </ul>
+            <div class="contact-actions">
+              <a class="cta-link cta-primary" href="#booking">立即預約</a>
+              <a class="cta-link cta-secondary" href="#top">返回頁首</a>
+            </div>
           </article>
-          <article class="card">
-            <h3>店舖資訊</h3>
-            <p>中環、尖沙咀、旺角等地段可直接展示，方便 walk-in 客與預約客快速找到位置。</p>
+          <article class="embed-card reveal">
+            <h3>到店安排</h3>
+            <p>網站可直接展示店舖地址、Google Maps、營業時間、walk-in 及預約注意事項。</p>
+            <div class="embed-shell" role="img" aria-label="Store directions block">
+              <div>
+                <strong>Opening hours and directions</strong>
+                <span>可在此整合地圖、預約指引與店舖資訊，方便手機客人快速決定。</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="booking">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Booking</span>
+          <h2>立即預約<span class="bilingual-title">Book a Cut, Beard Trim, or Full Grooming Session</span></h2>
+          <p>網站可以直接成為理髮店的預約入口，幫你減少重複回覆，亦令客人更快落單。</p>
+        </div>
+        <div class="booking-grid">
+          <article class="booking-class-card reveal">
+            <span class="booking-class-meta">Booking Flow</span>
+            <h3>最快行動入口</h3>
+            <p>客人可以由服務介紹直接進入 WhatsApp、表單或時間表預約，流程清楚自然。</p>
+            <div class="sample-links">
+              <a class="cta-link cta-primary" href="#contact">立即查詢</a>
+            </div>
+          </article>
+          <article class="panel reveal">
+            <h3 style="margin-top:0">這個 sample 適合怎樣的客</h3>
+            <ul class="notes-list">
+              <li>理髮店、barber house、男士 grooming 品牌。</li>
+              <li>想用網站清楚講好服務內容與價目，而不是只靠社交平台。</li>
+              <li>重視手機瀏覽、回店客、到店體驗與快速聯絡入口。</li>
+            </ul>
           </article>
         </div>
       </div>
@@ -407,13 +645,30 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <strong>Central Fade House</strong>
-        <span>Version 03 / Barber Shop</span>
+        <div class="footer-brand">Central Fade House</div>
+        <div class="footer-note">Version 03 / Barber</div>
       </div>
       <div>
-        <span>另外版本：<a href="index.html">Boxing</a> / <a href="pilates-studio.html">Pilates</a></span>
+        <div>Other samples: <a href="index.html">Boxing</a> / <a href="pilates-studio.html">Pilates</a></div>
       </div>
     </div>
   </footer>
+
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    revealItems.forEach((item) => {
+      if (!item.classList.contains("visible")) {
+        revealObserver.observe(item);
+      }
+    });
+  </script>
 </body>
 </html>
