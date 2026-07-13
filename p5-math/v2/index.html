@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1d4ed8">
+<meta name="description" content="香港小五數學視覺互動教學網站：多位數、分數、小數、代數、方程、面積、體積、圓、立體圖形、棒形圖與文字題。">
+<title>小五數學互動教室 2.0</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top"><div class="topin"><div class="brand"><div class="logo">∑</div><div class="brandText">小五數學互動教室 <small style="color:#64748b">2.0</small></div></div><button id="teacherBtn" class="teacher">👩‍🏫 教師提示</button></div></header>
+<main>
+<section id="home" class="hero"><div><h1>睇得明，先計得啱。</h1><p>14個小五核心課題、視覺示範、3種題型、限時挑戰及錯題重溫。手機直接用，毋須登入。</p><div class="heroBtns"><button class="btn white" onclick="jump('courses')">開始上課</button><button class="btn dark" onclick="jump('practice')">直接練習</button></div></div><div class="heroArt"><div class="bubble">5/6</div></div></section>
+
+<div id="courses" class="secHead"><div><h2>課程</h2><p>按香港小五核心範圍分類；學校實際次序可不同。</p></div><div id="topicCount" style="font-weight:900;color:#64748b"></div></div>
+<div id="catTabs" class="categoryTabs"></div>
+<div id="topicGrid" class="topicGrid"></div>
+<section id="coursePanel" class="coursePanel"><div class="courseHead"><div><div id="courseCategory" class="pill"></div><h2 id="courseTitle"></h2></div><button class="x" onclick="closeCourse()">×</button></div><div class="courseBody"><div><div id="courseVisual" class="visual"></div><div class="courseActions"><button class="btn soft" onclick="newDemo()">🔄 換一個示範</button><button class="btn dark" onclick="practiceCurrent()">✏️ 練習此課題</button></div></div><div><div class="panel"><h3>超易明步驟</h3><div id="courseSteps" class="steps"></div><div id="teacherNote" class="teacherNote"></div></div><div class="panel" style="margin-top:12px"><h3>學生要識</h3><div id="courseObjectives"></div></div></div></div></section>
+
+<div id="practice" class="secHead"><div><h2>練習模式</h2><p>選擇題、填充題、判斷題都會出現。</p></div></div>
+<div id="modeList" class="courseList">
+<button class="mode active" data-mode="unit"><div>📘</div><strong>單元練習</strong><span>只做一個課題，適合上堂後鞏固。</span></button>
+<button class="mode" data-mode="mixed"><div>🧠</div><strong>混合測驗</strong><span>跨課題測試，了解真正弱項。</span></button>
+<button class="mode" data-mode="speed"><div>⏱️</div><strong>60秒挑戰</strong><span>快速計算，限時內盡量答多題。</span></button>
+<button class="mode" data-mode="wrong"><div>🔁</div><strong>錯題重溫</strong><span>重做之前答錯的題目。</span></button>
+<button class="mode" data-mode="teacher"><div>📝</div><strong>教師小測</strong><span>固定10題，完成後顯示課題分析。</span></button>
+</div>
+<div class="practiceSetup panel">
+<label id="topicField" class="field">課題<select id="practiceTopic"></select></label>
+<label class="field">題型<select id="qType"><option value="mixed">混合題型</option><option value="mc">選擇題</option><option value="input">填充題</option><option value="tf">判斷題</option></select></label>
+<label id="lengthField" class="field">題數<select id="qLength"><option value="5">5題</option><option value="10" selected>10題</option><option value="15">15題</option><option value="20">20題</option></select></label>
+<button id="startBtn" class="btn dark" onclick="startPractice()">開始</button>
+</div>
+<section id="quiz" class="quiz"><div id="play"><div class="quizTop"><strong id="count">第 1 / 10 題</strong><div class="progress"><div id="progressIn" class="progressIn"></div></div><strong id="timerScore">0分</strong></div><div style="margin-top:12px"><span id="qTopic" class="pill"></span></div><div id="qVisual" class="qVisual"></div><div id="question" class="question"></div><div id="answerArea"></div><div id="feedback" class="feedback"></div><button id="nextBtn" class="btn soft next" onclick="nextQuestion()">下一題</button></div><div id="result" class="result"><div>完成！</div><div id="score" class="score"></div><p id="resultMsg"></p><div id="analysis"></div><button class="btn soft" onclick="startPractice()">再做一次</button></div></section>
+
+<div id="progressSec" class="secHead"><div><h2>學習紀錄</h2><p>只儲存在目前手機／瀏覽器。</p></div><button class="btn ghost" onclick="resetProgress()">清除紀錄</button></div>
+<div class="stats"><div class="stat"><b id="sSeen">0</b><small>已開啟課題</small></div><div class="stat"><b id="sAttempt">0</b><small>已答題目</small></div><div class="stat"><b id="sRate">0%</b><small>總正確率</small></div><div class="stat"><b id="sBest">0/10</b><small>最佳混合測驗</small></div><div class="stat"><b id="sWrong">0</b><small>待重溫錯題</small></div></div>
+<div class="panel" style="margin-top:13px"><h3>最近錯題</h3><div id="wrongList" class="wrongList"></div></div>
+<footer>內容依照香港小五常見核心數學範圍設計：數、代數、度量、圖形與空間、數據處理及應用題。</footer>
+</main>
+<nav class="bottom"><button class="nav active" onclick="navTo('home',this)"><span>🏠</span>首頁</button><button class="nav" onclick="navTo('courses',this)"><span>📚</span>課程</button><button class="nav" onclick="navTo('practice',this)"><span>✏️</span>練習</button><button class="nav" onclick="navTo('progressSec',this)"><span>⭐</span>紀錄</button></nav>
+<script src="app-data.js"></script>
+<script src="app-main.js"></script>
+</body>
+</html>
