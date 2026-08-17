@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Muscle First</title>
+<style>
+:root{--bg:#0b0f14;--panel:#121923;--panel2:#18212d;--line:#263241;--text:#f5f7fa;--muted:#a9b4c2;--blue:#7dd3fc;--green:#86efac;--yellow:#fde68a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif}.app{max-width:760px;margin:auto;padding:16px 14px 110px}.head{position:sticky;top:0;z-index:10;margin:-16px -14px 10px;padding:16px 14px 12px;background:linear-gradient(#0b0f14 78%,rgba(11,15,20,.2));backdrop-filter:blur(8px)}h1{margin:0;font-size:25px}.sub{font-size:13px;color:var(--muted);margin-top:3px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}.tab{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:11px;border-radius:13px;font-weight:900}.tab.on{background:var(--blue);color:#061018;border-color:transparent}.title{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:10px 2px 12px}.title h2{font-size:19px;margin:0}.tag{font-size:11px;color:var(--muted);background:var(--panel2);padding:5px 8px;border-radius:99px;white-space:nowrap}.warm,.card,.rules{border:1px solid var(--line);background:var(--panel);border-radius:17px;padding:13px;margin:9px 0}.warm{font-size:13px;color:var(--muted)}.warm b{color:var(--text)}.row{display:flex;gap:10px}.num{width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:var(--panel2);display:grid;place-items:center;color:var(--blue);font-weight:900}.name{font-weight:900;font-size:16px;line-height:1.25}.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.pill{font-size:11px;padding:5px 7px;border-radius:99px;background:var(--panel2)}.rest{color:var(--yellow)}.rir{color:var(--green)}.cue{font-size:12px;color:var(--muted);line-height:1.45;margin-top:7px}.setgrid{margin-top:11px;display:grid;gap:6px}.setrow{display:grid;grid-template-columns:34px 1fr 1fr 54px;gap:6px;align-items:center}.setn{font-size:11px;color:var(--muted);text-align:center}.inp{width:100%;min-width:0;background:#0f151e;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 6px;text-align:center;font-size:13px;outline:none}.inp:focus{border-color:var(--blue)}.done{display:flex;gap:8px;margin-top:10px}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:11px;padding:9px 10px;font-weight:800;flex:1}.btn.primary{background:var(--blue);border-color:transparent;color:#061018}.card.finished{opacity:.56}.card.finished .primary{background:var(--green)}.rules h3{margin:0 0 7px;font-size:15px}.rules p{margin:5px 0;color:var(--muted);font-size:12px;line-height:1.45}.hidden{display:none}.timer{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:min(730px,calc(100% - 20px));background:rgba(18,25,35,.98);border:1px solid var(--line);border-radius:17px;padding:9px;display:grid;grid-template-columns:1fr auto auto;gap:7px;align-items:center;z-index:20}.timer small{display:block;color:var(--muted);font-size:10px}.timer strong{font-size:19px}.timer button{border:0;border-radius:10px;padding:10px 11px;font-weight:900}.timer .go{background:var(--blue);color:#061018}.timer .quick{background:var(--panel2);color:var(--text)}.weekly{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.stat{background:var(--panel2);border-radius:11px;padding:9px}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="head"><h1>Muscle First</h1><div class="sub">12–16 週 · 3日 Full Body · 背闊 / 肩闊 / 上胸優先</div><div class="tabs"><button class="tab on" data-d="A">DAY A</button><button class="tab" data-d="B">DAY B</button><button class="tab" data-d="C">DAY C</button></div></div>
+<div id="content"></div>
+<div class="rules"><h3>Progression 規則</h3><p>大動作大部分保持 <b>1–2 RIR</b>；isolation 可去到 0–2 RIR。當全部 working sets 都做到 rep range 上限、動作仍穩定，而且 RIR 符合要求，下次加少量重量。</p><div class="weekly"><div class="stat"><b>14</b><span>Back direct sets / week</span></div><div class="stat"><b>11</b><span>Chest sets / week</span></div><div class="stat"><b>9</b><span>Side delt sets / week</span></div><div class="stat"><b>2–3m</b><span>Compound rest</span></div></div></div>
+</div>
+<div class="timer"><div><small>休息計時器</small><strong id="clock">02:00</strong></div><button class="quick" onclick="setTimer(90)">90s</button><button id="tbtn" class="go" onclick="toggleTimer()">開始</button></div>
+<script>
+const plans={
+A:{title:'Upper Chest + Lat Width',time:'75–90 min',warm:'5–8 分鐘輕量 cardio；第一個主要動作做 2–4 組 ramp-up warm-up。',x:[
+['Incline Dumbbell Press',3,'6–10','2.5–3 min','1–2','Bench 約 20–30°；落到有胸肌 stretch，唔好彈。'],
+['Lat Pulldown / Pull-up',3,'6–10','2–3 min','1–2','手肘向腰／褲袋方向拉；頂部俾 lat 完整伸展。'],
+['Leg Press / Squat',3,'6–10','3 min','1–2','穩定完整 ROM；唔需要做到 failure。'],
+['Chest-Supported Row',2,'8–12','2–3 min','1–2','胸貼 pad，唔借腰力；控制放返出去。'],
+['Cable Lateral Raise',3,'12–20','90–120 s','0–2','手肘帶動，唔聳膊；慢慢放低。'],
+['Leg Curl',2,'10–15','90–120 s','1–2','完整控制。'],
+['Biceps Curl',2,'8–15','90–120 s','0–2','Preacher / cable curl 都可以。'],
+['Calf Raise',2,'8–15','90–120 s','1–2','底部停一停，做足 stretch。']]},
+B:{title:'Chest + Back + Shoulder',time:'80–95 min',warm:'5–8 分鐘輕量 cardio；RDL 前逐級加重 warm-up。',x:[
+['Flat Machine / DB Chest Press',3,'6–10','2.5–3 min','1–2','穩定肩胛，胸肌主導。'],
+['Seated Cable Row',2,'8–12','2–3 min','1–2','手肘稍向外，偏 mid / upper back。'],
+['Single-arm Cable Lat Pulldown',2,'8–12','2 min','1–2','手肘向髖骨方向拉。'],
+['Romanian Deadlift',3,'6–10','3 min','1–2','Hip hinge；臀向後；hamstring 有 stretch。'],
+['Shoulder Press',2,'6–10','2–3 min','1–2','唔使堆太多 volume。'],
+['Cable Lateral Raise',3,'12–20','90–120 s','0–2','控制，唔追求超重。'],
+['Rear-Delt Fly',2,'12–20','90 s','0–2','穩定肩胛，控制離心。'],
+['Triceps Pressdown',2,'8–15','90–120 s','0–2','全程控制。'],
+['Abs',3,'8–15','60–90 s','1–2','Cable crunch / hanging knee raise；逐步加 resistance。']]},
+C:{title:'Back Thickness + Upper Chest',time:'80–95 min',warm:'5–8 分鐘輕量 cardio；第一個 press 做 ramp-up warm-up。',x:[
+['Incline Smith / Machine Press',3,'8–12','2–3 min','1–2','上胸優先；穩定 progression。'],
+['Chest-Supported T-Bar / Machine Row',3,'8–12','2–3 min','1–2','Day C 主力背厚；唔好借力。'],
+['Lat Pulldown / Pull-up',2,'8–12','2–3 min','1–2','可與 Day A 使用不同 grip。'],
+['Bulgarian Split Squat',3,'8–12 / leg','2–3 min','1–2','單腳力量 + hypertrophy，亦為行山跑步打底。'],
+['Pec Deck / Cable Fly',2,'10–15','90–120 s','0–2','控制 stretch，唔好只追求夾埋。'],
+['Cable Lateral Raise',3,'12–20','90–120 s','0–2','高質量 reps；最後幾下可以變慢。'],
+['Biceps Curl',2,'10–15','90–120 s','0–2','可與 Day A 用不同 variation。'],
+['Triceps Extension',2,'10–15','90–120 s','0–2','可用 overhead extension。'],
+['Optional Abs / Calves',2,'8–15','60–120 s','1–2','如果已經超過 90–95 min 或疲勞高可跳過。']]}}
+let day=localStorage.getItem('mf-day')||'A';
+function key(i,s,f){return `mf-${day}-${i}-${s}-${f}`}
+function card(ex,i){const [n,sets,reps,rest,rir,cue]=ex;let rows='';for(let s=1;s<=sets;s++){rows+=`<div class="setrow"><div class="setn">S${s}</div><input class="inp save" data-k="${key(i,s,'w')}" inputmode="decimal" placeholder="kg"><input class="inp save" data-k="${key(i,s,'r')}" inputmode="numeric" placeholder="reps"><input class="inp save" data-k="${key(i,s,'e')}" inputmode="decimal" placeholder="RIR"></div>`}return `<div class="card" data-card="${day}-${i}"><div class="row"><div class="num">${i+1}</div><div><div class="name">${n}</div><div class="pills"><span class="pill">${sets} × ${reps}</span><span class="pill rest">休 ${rest}</span><span class="pill rir">RIR ${rir}</span></div><div class="cue">${cue}</div></div></div><div class="setgrid">${rows}</div><div class="done"><button class="btn" onclick="restFrom('${rest}')">設定休息</button><button class="btn primary" onclick="finish(this,'${day}-${i}')">完成 ✓</button></div></div>`}
+function render(){const p=plans[day];document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.d===day));document.getElementById('content').innerHTML=`<div class="title"><h2>Day ${day} — ${p.title}</h2><span class="tag">${p.time}</span></div><div class="warm"><b>開始前：</b>${p.warm}<br>Warm-up sets 不計 working sets。</div>`+p.x.map(card).join('');document.querySelectorAll('.save').forEach(el=>{el.value=localStorage.getItem(el.dataset.k)||'';el.oninput=()=>localStorage.setItem(el.dataset.k,el.value)});document.querySelectorAll('.card').forEach(c=>{if(localStorage.getItem('done-'+c.dataset.card)==='1')c.classList.add('finished')})}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{day=b.dataset.d;localStorage.setItem('mf-day',day);render();scrollTo(0,0)});
+function finish(btn,id){const c=btn.closest('.card');const on=!c.classList.contains('finished');c.classList.toggle('finished',on);localStorage.setItem('done-'+id,on?'1':'0');btn.textContent=on?'已完成 ✓':'完成 ✓'}
+let base=120,left=120,tick=null;function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}function draw(){document.getElementById('clock').textContent=fmt(left)}function setTimer(s){clearInterval(tick);tick=null;base=left=s;draw();document.getElementById('tbtn').textContent='開始'}function restFrom(t){let s=t.includes('3 min')?180:t.includes('2.5')?150:t.includes('2–3')?150:t.includes('2 min')?120:t.includes('90')?90:60;setTimer(s)}function toggleTimer(){const b=document.getElementById('tbtn');if(tick){clearInterval(tick);tick=null;b.textContent='繼續';return}if(left<=0)left=base;b.textContent='暫停';tick=setInterval(()=>{left--;draw();if(left<=0){clearInterval(tick);tick=null;b.textContent='再開始';if(navigator.vibrate)navigator.vibrate([250,120,250])}},1000)}
+render();draw();
+</script>
+</body></html>
