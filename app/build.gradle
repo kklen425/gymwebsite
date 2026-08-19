@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    namespace 'com.musclefirst.gym'
+    namespace 'com.musclefirst.editable'
     compileSdk 35
 
     defaultConfig {
-        applicationId 'com.musclefirst.gym'
+        applicationId 'com.musclefirst.editable'
         minSdk 23
         targetSdk 34
-        versionCode 3
-        versionName '1.2'
+        versionCode 1
+        versionName '2.0'
     }
 }
