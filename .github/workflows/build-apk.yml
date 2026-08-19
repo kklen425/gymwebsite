@@ -34,11 +34,11 @@ jobs:
         run: gradle :app:assembleDebug --stacktrace
 
       - name: Rename APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk Muscle-First-v1.1.apk
+        run: cp app/build/outputs/apk/debug/app-debug.apk Muscle-First-v1.2.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: muscle-first-apk-v1.1
-          path: Muscle-First-v1.1.apk
+          name: muscle-first-apk-v1.2
+          path: Muscle-First-v1.2.apk
           if-no-files-found: error
