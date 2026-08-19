@@ -25,24 +25,19 @@ public class MainActivity extends Activity {
         settings.setDisplayZoomControls(false);
         webView.setWebViewClient(new WebViewClient());
         webView.setBackgroundColor(Color.rgb(11, 15, 20));
-        webView.loadUrl("file:///android_asset/index.html");
+        webView.loadUrl("file:///android_asset/v2.html");
         setContentView(webView);
     }
 
     @Override
     public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            webView.goBack();
-        } else {
-            super.onBackPressed();
-        }
+        if (webView != null && webView.canGoBack()) webView.goBack();
+        else super.onBackPressed();
     }
 
     @Override
     protected void onDestroy() {
-        if (webView != null) {
-            webView.destroy();
-        }
+        if (webView != null) webView.destroy();
         super.onDestroy();
     }
 }
