@@ -1,4 +1,4 @@
-package com.musclefirst.gym;
+package com.musclefirst.editable;
 
 import android.app.Activity;
 import android.graphics.Color;
