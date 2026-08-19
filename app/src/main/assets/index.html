@@ -3,63 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>Muscle First v1.1</title>
+<title>Muscle First v1.2</title>
 <style>
-:root{--bg:#0b0f14;--panel:#121923;--panel2:#18212d;--line:#263241;--text:#f5f7fa;--muted:#a9b4c2;--blue:#7dd3fc;--green:#86efac;--yellow:#fde68a;--red:#fca5a5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif}.app{max-width:760px;margin:auto;padding:16px 14px 116px}.head{position:sticky;top:0;z-index:10;margin:-16px -14px 10px;padding:16px 14px 12px;background:linear-gradient(#0b0f14 80%,rgba(11,15,20,.2));backdrop-filter:blur(8px)}h1{margin:0;font-size:25px}.sub{font-size:13px;color:var(--muted);margin-top:3px}.ver{font-size:10px;background:var(--panel2);padding:3px 6px;border-radius:99px;margin-left:6px;color:var(--green)}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}.tab{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:11px;border-radius:13px;font-weight:900}.tab.on{background:var(--blue);color:#061018;border-color:transparent}.title{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:10px 2px 12px}.title h2{font-size:19px;margin:0}.tag{font-size:11px;color:var(--muted);background:var(--panel2);padding:5px 8px;border-radius:99px;white-space:nowrap}.warm,.card,.rules,.volume{border:1px solid var(--line);background:var(--panel);border-radius:17px;padding:13px;margin:9px 0}.warm{font-size:13px;color:var(--muted)}.warm b{color:var(--text)}.row{display:flex;gap:10px}.num{width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:var(--panel2);display:grid;place-items:center;color:var(--blue);font-weight:900}.name{font-weight:900;font-size:16px;line-height:1.25}.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.pill{font-size:11px;padding:5px 7px;border-radius:99px;background:var(--panel2)}.rest{color:var(--yellow)}.rir{color:var(--green)}.cue{font-size:12px;color:var(--muted);line-height:1.45;margin-top:7px}.setgrid{margin-top:11px;display:grid;gap:6px}.setrow{display:grid;grid-template-columns:34px 1fr 1fr 54px;gap:6px;align-items:center}.setn{font-size:11px;color:var(--muted);text-align:center}.inp{width:100%;min-width:0;background:#0f151e;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 6px;text-align:center;font-size:13px;outline:none}.inp:focus{border-color:var(--blue)}.done{display:flex;gap:8px;margin-top:10px}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:11px;padding:9px 10px;font-weight:800;flex:1}.btn.primary{background:var(--blue);border-color:transparent;color:#061018}.btn.danger{color:var(--red)}.card.finished{opacity:.56}.card.finished .primary{background:var(--green)}.rules h3,.volume h3{margin:0 0 8px;font-size:15px}.rules p{margin:5px 0;color:var(--muted);font-size:12px;line-height:1.5}.timer{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:min(730px,calc(100% - 20px));background:rgba(18,25,35,.98);border:1px solid var(--line);border-radius:17px;padding:9px;display:grid;grid-template-columns:1fr auto auto;gap:7px;align-items:center;z-index:20}.timer small{display:block;color:var(--muted);font-size:10px}.timer strong{font-size:19px}.timer button{border:0;border-radius:10px;padding:10px 11px;font-weight:900}.timer .go{background:var(--blue);color:#061018}.timer .quick{background:var(--panel2);color:var(--text)}.volrow{display:grid;grid-template-columns:76px 1fr 64px;gap:8px;align-items:center;margin:9px 0}.volname{font-size:12px;font-weight:800}.bar{height:10px;background:#0f151e;border:1px solid var(--line);border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--blue);width:0}.volnum{text-align:right;font-size:11px;color:var(--muted)}.volnum b{color:var(--text)}.footnote{font-size:11px;color:var(--muted);line-height:1.45;margin-top:8px}
-</style>
-</head>
-<body>
-<div class="app">
-<div class="head"><h1>Muscle First <span class="ver">v1.1</span></h1><div class="sub">12–16 週 · 3日 Full Body · 胸 / 背 / 側肩優先</div><div class="tabs"><button class="tab on" data-d="A">DAY A</button><button class="tab" data-d="B">DAY B</button><button class="tab" data-d="C">DAY C</button></div></div>
-<div id="content"></div>
-<div class="volume"><h3>本週 Direct Volume</h3><div id="volumes"></div><div class="footnote">只計主要 direct working sets，唔將所有 indirect sets 硬當成完整一組。完成一個 exercise 後會自動計入。</div><button class="btn danger" style="margin-top:10px;width:100%" onclick="resetWeek()">重設本週完成狀態</button></div>
-<div class="rules"><h3>Science / S&amp;C 執行規則</h3><p><b>Compound：</b>大部分 1–2 RIR；休息 2–3 分鐘。<br><b>Isolation：</b>0–2 RIR；休息約 90–120 秒。<br><b>Progression：</b>全部 working sets 去到 rep range 上限、技術穩定、RIR 仍符合目標 → 下一次加少量重量。唔需要每組 failure。</p></div>
-</div>
-<div class="timer"><div><small>休息計時器</small><strong id="clock">02:00</strong></div><button class="quick" onclick="setTimer(90)">90s</button><button id="tbtn" class="go" onclick="toggleTimer()">開始</button></div>
-<script>
-const plans={
-A:{title:'Upper Chest + Lat Width',time:'85–100 min',warm:'5–8 分鐘輕量 cardio；Incline DB Press 做 2–4 組 ramp-up warm-up。',x:[
-['Incline Dumbbell Press',3,'6–10','2.5–3 min','1–2','Bench 約 20–30°；落到有胸肌 stretch，唔好彈。',{Chest:3}],
-['Lat Pulldown / Pull-up',3,'6–10','2–3 min','1–2','手肘向腰／褲袋方向拉；頂部俾 lat 完整伸展。',{Back:3}],
-['Chest Press Machine',2,'8–12','2–3 min','1–2','用水平或輕微 incline/converging machine；座位調到 handles 約中胸高度，做完整舒服 ROM。',{Chest:2}],
-['Leg Press / Squat',3,'6–10','3 min','1–2','穩定完整 ROM；唔需要做到 failure。',{Quads:3}],
-['Chest-Supported Row',2,'8–12','2–3 min','1–2','胸貼 pad，唔借腰力；控制放返出去。',{Back:2}],
-['Cable Lateral Raise',3,'12–20','90–120 s','0–2','手肘帶動，唔聳膊；慢慢放低。',{SideDelt:3}],
-['Leg Curl',2,'10–15','90–120 s','1–2','完整控制，唔用慣性。',{Hamstrings:2}],
-['Biceps Curl',2,'8–15','90–120 s','0–2','Preacher / cable curl 都可以。',{Biceps:2}],
-['Calf Raise',2,'8–15','90–120 s','1–2','底部停一停，做足 stretch。',{Calves:2}]]},
-B:{title:'Chest + Back + Shoulder',time:'80–95 min',warm:'5–8 分鐘輕量 cardio；RDL 前逐級加重 warm-up。',x:[
-['Flat Machine / DB Chest Press',3,'6–10','2.5–3 min','1–2','穩定肩胛，胸肌主導。',{Chest:3}],
-['Seated Cable Row',2,'8–12','2–3 min','1–2','手肘稍向外，偏 mid / upper back。',{Back:2}],
-['Single-arm Cable Lat Pulldown',2,'8–12','2 min','1–2','手肘向髖骨方向拉。',{Back:2}],
-['Romanian Deadlift',3,'6–10','3 min','1–2','Hip hinge；臀向後；hamstring 有明顯 stretch。',{Hamstrings:3}],
-['Shoulder Press',2,'6–10','2–3 min','1–2','Front delt 已有 chest press indirect stimulus，所以 direct volume 保守。',{FrontDelt:2}],
-['Cable Lateral Raise',3,'12–20','90–120 s','0–2','控制，唔追求超重。',{SideDelt:3}],
-['Rear-Delt Fly',2,'12–20','90 s','0–2','穩定肩胛，控制離心。',{RearDelt:2}],
-['Triceps Pressdown',2,'8–15','90–120 s','0–2','全程控制。',{Triceps:2}],
-['Abs',3,'8–15','60–90 s','1–2','Cable crunch / hanging knee raise；逐步加 resistance。',{Abs:3}]]},
-C:{title:'Back Thickness + Upper Chest',time:'80–95 min',warm:'5–8 分鐘輕量 cardio；第一個 press 做 ramp-up warm-up。',x:[
-['Incline Smith / Machine Press',3,'8–12','2–3 min','1–2','上胸優先；固定器械方便穩定 progression。',{Chest:3}],
-['Chest-Supported T-Bar / Machine Row',3,'8–12','2–3 min','1–2','Day C 主力背厚；唔好為重量借力。',{Back:3}],
-['Lat Pulldown / Pull-up',2,'8–12','2–3 min','1–2','可與 Day A 使用不同 grip。',{Back:2}],
-['Bulgarian Split Squat',3,'8–12 / leg','2–3 min','1–2','單腳力量 + hypertrophy，亦為之後行山跑步打底。',{Quads:3}],
-['Pec Deck / Cable Fly',2,'10–15','90–120 s','0–2','控制 stretch，唔好只追求夾埋。',{Chest:2}],
-['Cable Lateral Raise',3,'12–20','90–120 s','0–2','高質量 reps；最後幾下可以明顯變慢。',{SideDelt:3}],
-['Biceps Curl',2,'10–15','90–120 s','0–2','可與 Day A 用不同 variation。',{Biceps:2}],
-['Triceps Extension',2,'10–15','90–120 s','0–2','可用 overhead extension。',{Triceps:2}],
-['Optional Abs / Calves',2,'8–15','60–120 s','1–2','如果已經超過 90–95 min 或疲勞高可跳過。',{}]]}}
-const targets={Chest:13,Back:14,SideDelt:9,Quads:6,Hamstrings:5,Biceps:4,Triceps:4};
-const labels={Chest:'Chest',Back:'Back',SideDelt:'Side delt',Quads:'Quads',Hamstrings:'Hamstrings',Biceps:'Biceps',Triceps:'Triceps'};
-let day=localStorage.getItem('mf-day')||'A';
-function key(i,s,f){return `mf11-${day}-${i}-${s}-${f}`}
-function card(ex,i){const [n,sets,reps,rest,rir,cue]=ex;let rows='';for(let s=1;s<=sets;s++){rows+=`<div class="setrow"><div class="setn">S${s}</div><input class="inp save" data-k="${key(i,s,'w')}" inputmode="decimal" placeholder="kg"><input class="inp save" data-k="${key(i,s,'r')}" inputmode="numeric" placeholder="reps"><input class="inp save" data-k="${key(i,s,'e')}" inputmode="decimal" placeholder="RIR"></div>`}return `<div class="card" data-card="${day}-${i}"><div class="row"><div class="num">${i+1}</div><div><div class="name">${n}</div><div class="pills"><span class="pill">${sets} × ${reps}</span><span class="pill rest">休 ${rest}</span><span class="pill rir">RIR ${rir}</span></div><div class="cue">${cue}</div></div></div><div class="setgrid">${rows}</div><div class="done"><button class="btn" onclick="restFrom('${rest}')">設定休息</button><button class="btn primary" onclick="finish(this,'${day}-${i}')">完成 ✓</button></div></div>`}
-function render(){const p=plans[day];document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.d===day));document.getElementById('content').innerHTML=`<div class="title"><h2>Day ${day} — ${p.title}</h2><span class="tag">${p.time}</span></div><div class="warm"><b>開始前：</b>${p.warm}<br>Warm-up sets 不計 working sets。</div>`+p.x.map(card).join('');document.querySelectorAll('.save').forEach(el=>{el.value=localStorage.getItem(el.dataset.k)||'';el.oninput=()=>localStorage.setItem(el.dataset.k,el.value)});document.querySelectorAll('.card').forEach(c=>{if(localStorage.getItem('done11-'+c.dataset.card)==='1')c.classList.add('finished')});renderVolume()}
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{day=b.dataset.d;localStorage.setItem('mf-day',day);render();scrollTo(0,0)});
-function finish(btn,id){const c=btn.closest('.card');const on=!c.classList.contains('finished');c.classList.toggle('finished',on);localStorage.setItem('done11-'+id,on?'1':'0');btn.textContent=on?'已完成 ✓':'完成 ✓';renderVolume()}
-function completedVolume(){const out={};Object.keys(targets).forEach(k=>out[k]=0);Object.entries(plans).forEach(([d,p])=>p.x.forEach((ex,i)=>{if(localStorage.getItem('done11-'+d+'-'+i)==='1'){const tags=ex[6]||{};Object.entries(tags).forEach(([m,s])=>{if(out[m]!==undefined)out[m]+=s})}}));return out}
-function renderVolume(){const v=completedVolume();document.getElementById('volumes').innerHTML=Object.keys(targets).map(m=>{const pct=Math.min(100,Math.round(v[m]/targets[m]*100));return `<div class="volrow"><div class="volname">${labels[m]}</div><div class="bar"><div class="fill" style="width:${pct}%"></div></div><div class="volnum"><b>${v[m]}</b> / ${targets[m]}</div></div>`}).join('')}
-function resetWeek(){if(confirm('重設本週完成狀態？重量 / reps 記錄會保留。')){Object.keys(localStorage).filter(k=>k.startsWith('done11-')).forEach(k=>localStorage.removeItem(k));render()}}
-let base=120,left=120,tick=null;function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}function draw(){document.getElementById('clock').textContent=fmt(left)}function setTimer(s){clearInterval(tick);tick=null;base=left=s;draw();document.getElementById('tbtn').textContent='開始'}function restFrom(t){let s=t.includes('3 min')?180:t.includes('2.5')?150:t.includes('2–3')?150:t.includes('2 min')?120:t.includes('90')?90:60;setTimer(s)}function toggleTimer(){const b=document.getElementById('tbtn');if(tick){clearInterval(tick);tick=null;b.textContent='繼續';return}if(left<=0)left=base;b.textContent='暫停';tick=setInterval(()=>{left--;draw();if(left<=0){clearInterval(tick);tick=null;b.textContent='再開始';if(navigator.vibrate)navigator.vibrate([250,120,250])}},1000)}
-render();draw();
-</script>
-</body></html>
+:root{--bg:#0b0f14;--panel:#121923;--panel2:#18212d;--line:#263241;--text:#f5f7fa;--muted:#a9b4c2;--blue:#7dd3fc;--green:#86efac;--yellow:#fde68a;
